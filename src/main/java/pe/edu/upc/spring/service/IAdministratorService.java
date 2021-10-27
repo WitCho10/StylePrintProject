@@ -7,9 +7,8 @@ import pe.edu.upc.spring.model.Administrator;
 
 public interface IAdministratorService {
 
-	public boolean insert(Administrator administrator);
-	public boolean modify(Administrator administrator);
-	public void remove(int IdAdmin);
+	public boolean Registrar(Administrator administrator);
+	public void Eliminar(int IdAdmin);
 	public Optional<Administrator>ListId(int IdAdmin);
 	List<Administrator> listar();
 

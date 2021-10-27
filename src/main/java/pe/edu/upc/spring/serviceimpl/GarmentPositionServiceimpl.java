@@ -15,41 +15,39 @@ import pe.edu.upc.spring.service.IGarmentPositionService;
 public class GarmentPositionServiceimpl implements IGarmentPositionService{
 
 	@Autowired
-	private IGarmentPositionRepository dGarmentPosition;
-	
-	@Override
-	@Transactional
-	public boolean insert(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	private IGarmentPositionRepository cGarmentPosition;
 
 	@Override
 	@Transactional
-	public boolean modify(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	@Transactional
-	public void remove(int IdAdmin) {
-		// TODO Auto-generated method stub
+	public boolean Registar(GarmentPosition garmentPosition) {
 		
+		GarmentPosition objGarmentPosition = cGarmentPosition.save(garmentPosition);
+		if(objGarmentPosition==null)
+			return false;
+		else
+			return true;
+	
 	}
 
 	@Override
 	@Transactional
-	public Optional<GarmentPosition> ListId(int idPosition) {
-		// TODO Auto-generated method stub
-		return null;
+	public void Eliminar(int IdGarmentPosition) {
+		cGarmentPosition.deleteById(IdGarmentPosition);
 	}
 
 	@Override
-	@Transactional
-	public List<GarmentPosition> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public Optional<GarmentPosition> ListId(int IdGarmentPosition) {
+	
+		return cGarmentPosition.findById(IdGarmentPosition);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<GarmentPosition> Listar() {
+		return cGarmentPosition.findAll();
+	}
+	
+
 
 }

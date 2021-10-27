@@ -7,12 +7,8 @@ import pe.edu.upc.spring.model.Garment;
 
 public interface IGarmentService {
 	
-	public boolean insertar(Garment garment);
-	public boolean modificar(Garment garment);
-	public void eliminar(int idGarment);
+	public boolean Registrar(Garment garment);
+	public void Eliminar(int idGarment);
 	public Optional<Garment> listarId(int idGarment);
 	List<Garment> listar();
-	List<Garment>findname(String nameGarment);
-	
-
 }

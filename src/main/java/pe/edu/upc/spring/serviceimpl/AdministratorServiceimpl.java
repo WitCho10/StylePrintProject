@@ -1,3 +1,5 @@
+package pe.edu.upc.spring.serviceimpl;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,41 +15,35 @@ import pe.edu.upc.spring.service.IAdministratorService;
 public class AdministratorServiceimpl implements IAdministratorService{
 
 	@Autowired
-	private IAdministratorRepository aAdministrator;
-	
+	private IAdministratorRepository sAdministrator;
+
 	@Override
 	@Transactional
-	public boolean insert(Administrator administrator) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Registrar(Administrator administrator) {
+		Administrator objAdministrator=sAdministrator.save(administrator);
+		if(objAdministrator==null)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
 	@Transactional
-	public boolean modify(Administrator administrator) {
-		// TODO Auto-generated method stub
-		return false;
+	public void Eliminar(int IdAdmin) {
+		sAdministrator.deleteById(IdAdmin);
 	}
 
 	@Override
-	@Transactional
-	public void remove(int IdAdmin) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public Optional<Administrator> ListId(int IdAdmin) {
-		// TODO Auto-generated method stub
-		return null;
+		return sAdministrator.findById(IdAdmin);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<Administrator> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return sAdministrator.findAll();
 	}
+	
 
 }

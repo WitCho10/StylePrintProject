@@ -6,8 +6,8 @@ import java.util.Optional;
 import pe.edu.upc.spring.model.GarmentPersonalized;
 
 public interface IGarmentPersonalizedService {
-	public boolean insertar(GarmentPersonalized garmentpersonalized);
-	public boolean modificar(GarmentPersonalized garmentpersonalized);
+	public boolean Registrar(GarmentPersonalized garmentpersonalized);
+	public void eliminar (int IdGarmentPersonalized);
 	public Optional<GarmentPersonalized> listarId(int idGarmentPersonalized);
 	List<GarmentPersonalized> listar();
 }
