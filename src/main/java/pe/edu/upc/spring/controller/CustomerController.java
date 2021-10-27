@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+
 import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.service.ICustomerService;
 
@@ -96,6 +97,13 @@ public class CustomerController {
 		
 	}
 	
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model) 
+	{
+		model.addAttribute("customer", new Customer());
+		return "buscar";
+	}	
+	
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Customer customer)
 			throws ParseException
@@ -104,10 +112,6 @@ public class CustomerController {
 		customer.setNameCustomer(customer.getNameCustomer());
 		listaClientes = cService.buscarNombre(customer.getNameCustomer());
 		
-		if(listaClientes.isEmpty())
-		{
-			listaClientes=cService.buscarNombre(customer.getNameCustomer());
-		}
 		
 		if (listaClientes.isEmpty()) {
 			model.put("mensaje", "No existen coincidencias");

@@ -19,7 +19,7 @@ import pe.edu.upc.spring.model.Status;
 import pe.edu.upc.spring.service.IStatusService;
 
 @Controller
-@RequestMapping("/designer")
+@RequestMapping("/status")
 public class StatusController {
 	
 	@Autowired

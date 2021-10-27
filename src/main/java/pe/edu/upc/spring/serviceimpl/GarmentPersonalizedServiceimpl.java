@@ -7,42 +7,69 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import pe.edu.upc.spring.model.GarmentPersonalized;
 import pe.edu.upc.spring.repository.IGarmentPersonalizedRepository;
 import pe.edu.upc.spring.service.IGarmentPersonalizedService;
 
 @Service
-public class GarmentPersonalizedServiceimpl implements  IGarmentPersonalizedService{
+public class GarmentPersonalizedServiceImpl implements  IGarmentPersonalizedService{
 
 	@Autowired
-	private IGarmentPersonalizedRepository gGarmentPersonalized;
+	private IGarmentPersonalizedRepository gpGarmentPersonalized;
 	
 	@Override
 	@Transactional
-	public boolean insertar(GarmentPersonalized garmentpersonalized) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Registrar(GarmentPersonalized garmentpersonalized) {
+		GarmentPersonalized objGarmentPersonalized = gpGarmentPersonalized.save(garmentpersonalized);
+		if(objGarmentPersonalized==null)
+		{
+			return false;
+		}else
+		{
+			return true;
+		}
+
 	}
 
 	@Override
 	@Transactional
-	public boolean modificar(GarmentPersonalized garmentpersonalized) {
-		// TODO Auto-generated method stub
-		return false;
+	public void eliminar(int idGarmentPersonalized) {
+		gpGarmentPersonalized.deleteById(idGarmentPersonalized);
+		
 	}
 
+	
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public Optional<GarmentPersonalized> listarId(int idGarmentPersonalized) {
-		// TODO Auto-generated method stub
-		return null;
+		return gpGarmentPersonalized.findById(idGarmentPersonalized);
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Optional<GarmentPersonalized> buscarId(int idGarmentPersonalized) {
+		return gpGarmentPersonalized.findById(idGarmentPersonalized);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<GarmentPersonalized> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return gpGarmentPersonalized.findAll();
+		
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<GarmentPersonalized> buscarUrl(String urlimageGarmentPersonalized) {
+		
+		return gpGarmentPersonalized.buscarUrl(urlimageGarmentPersonalized);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<GarmentPersonalized> buscarCliente(String nameCustomer) {
+		return gpGarmentPersonalized.buscarCliente(nameCustomer);
 	}
 
 }

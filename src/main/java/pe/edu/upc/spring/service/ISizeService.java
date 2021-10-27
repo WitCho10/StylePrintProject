@@ -6,8 +6,9 @@ import java.util.Optional;
 import pe.edu.upc.spring.model.Size;
 
 public interface ISizeService  {
-	public boolean Insert(Size size);
+	
+	public boolean Registrar(Size size);
+	public void eliminar (int idSize);
 	public Optional<Size> listarId(int idSize);
-	 	List<Size> Listar();
-	 	List<Size> SearchName(String NameSize);
+	List<Size> listar();
 }

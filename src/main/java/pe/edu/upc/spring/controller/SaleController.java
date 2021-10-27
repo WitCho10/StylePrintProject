@@ -15,7 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+
+import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.model.Sale;
+import pe.edu.upc.spring.model.Status;
+import pe.edu.upc.spring.service.IStatusService;
+import pe.edu.upc.spring.service.ICustomerService;
 import pe.edu.upc.spring.service.ISaleService;
 
 @Controller
@@ -24,6 +29,12 @@ public class SaleController {
 	
 	@Autowired
 	private ISaleService sService;
+	
+	@Autowired
+	private IStatusService stService;
+	
+	@Autowired
+	private ICustomerService cuService;	
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -39,14 +50,23 @@ public class SaleController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("sale", new Sale());
+		model.addAttribute("customer", new Customer());
+		model.addAttribute("status", new Status());
+		
+		model.addAttribute("listaClientes", cuService.listar());
+		model.addAttribute("listaEstados", stService.listar());	
 		return "sale";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Sale objSale, BindingResult binRes, Model model) throws ParseException
 	{
-		if(binRes.hasErrors())
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaClientes", cuService.listar());
+			model.addAttribute("listaEstados", stService.listar());	
+		
 			return "sale";
+		}
 		else {
 			boolean flag = sService.Registrar(objSale);
 			if(flag)
@@ -67,7 +87,11 @@ public class SaleController {
 			return "redirect:/sale/listar";
 		}
 		else {
-			model.addAttribute("sale", objSale);
+			model.addAttribute("listaClientes", cuService.listar());
+			model.addAttribute("listaEstados", stService.listar());	
+			if (objSale.isPresent())
+				objSale.ifPresent(o -> model.addAttribute("sale", o));
+			
 			return "sale";
 		}
 	}

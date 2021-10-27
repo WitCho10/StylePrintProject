@@ -4,52 +4,45 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.spring.model.Garment;
 import pe.edu.upc.spring.repository.IGarmentRepository;
 import pe.edu.upc.spring.service.IGarmentService;
 
-@Repository
-public class GarmentServiceimpl implements IGarmentService{
+@Service
+public class GarmentServiceImpl implements IGarmentService{
 	
 	@Autowired
 	private IGarmentRepository gGarment;
 	
 	@Override
-	public boolean insertar(Garment garment) {
-		// TODO Auto-generated method stub
-		return false;
+	@Transactional
+	public boolean Registrar(Garment garment) {
+		Garment objGarment = gGarment.save(garment);
+		if(objGarment==null)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
-	public boolean modificar(Garment garment) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	@Transactional
 	public void eliminar(int idGarment) {
-		// TODO Auto-generated method stub
-		
+		gGarment.deleteById(idGarment);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<Garment> listarId(int idGarment) {
-		// TODO Auto-generated method stub
-		return null;
+		return gGarment.findById(idGarment);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Garment> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Garment> findname(String nameGarment) {
-		// TODO Auto-generated method stub
-		return null;
+		return gGarment.findAll();
 	}
 
 	

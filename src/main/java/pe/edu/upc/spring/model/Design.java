@@ -31,6 +31,7 @@ public class Design implements Serializable{
 	@Column(name="nombreDiseño", length=60, nullable=false)
 	private String nameDesign;
 	
+	@Column(name="urlimagenDiseño", length=200, nullable=false)
 	private String imgDesign;
 	
 	@ManyToOne
@@ -109,10 +110,5 @@ public class Design implements Serializable{
 		this.dateDesign = dateDesign;
 	}
 
-	
-	
-	
-	
-	
 	
 }

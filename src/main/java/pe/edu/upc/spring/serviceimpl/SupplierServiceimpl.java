@@ -19,48 +19,36 @@ public class SupplierServiceImpl implements ISupplierService{
 	
 	@Override
 	@Transactional
-	public boolean Insert(Supplier supplier) {
-		
-		Supplier objSupplier=sSupplier.save(supplier);
+	public boolean Registrar(Supplier supplier) {
+		Supplier objSupplier = sSupplier.save(supplier);
 		if(objSupplier==null)
-		return false;
-			else
-		return true;
+			return false;
+		else
+			return true;
 	}
-
+	
 	@Override
 	@Transactional
-	public boolean Modify(Supplier supplier) {
-		// TODO Auto-generated method stub
-		return false;
+	public void eliminar(int idSupplier) {
+		sSupplier.deleteById(idSupplier);
 	}
 
 	@Override
-	@Transactional
-	public void Remove(int idSupplier) {
-		// TODO Auto-generated method stub
-		
+	@Transactional(readOnly = true)
+	public Optional<Supplier> listarId(int idSupplier) {
+		return sSupplier.findById(idSupplier);
 	}
 
 	@Override
-	@Transactional(readOnly=true)
-	public Optional<Supplier> ListId(int idSupplier) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public List<Supplier> listar() {
+		return sSupplier.findAll();
 	}
 
 	@Override
-	@Transactional(readOnly=true)
-	public List<Supplier> List() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Transactional(readOnly=true)
-	public List<Supplier> searchSupplier(String nameSupplier) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public List<Supplier> buscarNombre(String nameSupplier) {
+		return sSupplier.buscarNombre(nameSupplier);
 	}
 	
 }

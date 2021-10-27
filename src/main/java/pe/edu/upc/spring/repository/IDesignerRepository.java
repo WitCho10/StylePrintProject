@@ -13,7 +13,7 @@ import pe.edu.upc.spring.model.Designer;
 @Repository
 public interface IDesignerRepository extends JpaRepository<Designer, Integer>{
 
-	@Query("from Design d where d.nameDesign like %:nameDesign%")
-	List<Designer> buscarNombre(@Param("nameDesign") String nameDesign);
+	@Query("from Designer d where d.nameDesigner like %:nameDesigner%")
+	List<Designer> buscarNombre(@Param("nameDesigner") String nameDesigner);
 
 }

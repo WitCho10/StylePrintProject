@@ -50,9 +50,9 @@ public class ComplainxCustomerController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		
-		model.addAttribute("race", new Customer());
-		model.addAttribute("dueno", new Complain());
-		model.addAttribute("pet", new ComplainxCustomer());
+		model.addAttribute("customer", new Customer());
+		model.addAttribute("complain", new Complain());
+		model.addAttribute("complainxcustomer", new ComplainxCustomer());
 		
 		model.addAttribute("listaClientes", cuService.listar());
 		model.addAttribute("listaQuejas", coService.listar());		

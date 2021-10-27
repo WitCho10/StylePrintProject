@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+
 import pe.edu.upc.spring.model.Designer;
 import pe.edu.upc.spring.service.IDesignerService;
 
@@ -96,6 +97,13 @@ public class DesignerController {
 		
 	}
 	
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model) 
+	{
+		model.addAttribute("designer", new Designer());
+		return "buscar";
+	}	
+	
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Designer designer)
 			throws ParseException
@@ -104,11 +112,6 @@ public class DesignerController {
 		designer.setNameDesigner(designer.getNameDesigner());
 		listaDisenadores = dService.buscarNombre(designer.getNameDesigner());
 		
-		if(listaDisenadores.isEmpty())
-		{
-			
-			listaDisenadores=dService.buscarNombre(designer.getNameDesigner());
-		}
 		
 		if (listaDisenadores.isEmpty()) {
 			model.put("mensaje", "No existen coincidencias");

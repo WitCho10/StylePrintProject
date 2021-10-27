@@ -11,39 +11,44 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PosicionPrenda")
-
 public class GarmentPosition implements Serializable  {
-
-
-
-	public GarmentPosition(int idPosition, String namePosition) {
-		super();
-		IdPosition = idPosition;
-		this.namePosition = namePosition;
-	}
-	public GarmentPosition() {
-		super();
-	}
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int IdPosition;
-	@Column(name="NombrePosicionPrenda",length=60,nullable=false)	
-	private String namePosition;
+	private int idGarmentPosition;
 	
-	public int getIdPosition() {
-		return IdPosition;
+	@Column(name="NombrePosicionPrenda",length=60,nullable=false)	
+	private String nameGarmentPosition;
+
+	public GarmentPosition() {
+		super();
+		
 	}
-	public void setIdPosition(int idPosition) {
-		IdPosition = idPosition;
+
+	public GarmentPosition(int idGarmentPosition, String nameGarmentPosition) {
+		super();
+		this.idGarmentPosition = idGarmentPosition;
+		this.nameGarmentPosition = nameGarmentPosition;
 	}
-	public String getNamePosition() {
-		return namePosition;
+
+	public int getIdGarmentPosition() {
+		return idGarmentPosition;
 	}
-	public void setNamePosition(String namePosition) {
-		this.namePosition = namePosition;
+
+	public void setIdGarmentPosition(int idGarmentPosition) {
+		this.idGarmentPosition = idGarmentPosition;
 	}
+
+	public String getNameGarmentPosition() {
+		return nameGarmentPosition;
+	}
+
+	public void setNameGarmentPosition(String nameGarmentPosition) {
+		this.nameGarmentPosition = nameGarmentPosition;
+	}
+
+	
 	
 }

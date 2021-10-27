@@ -13,36 +13,37 @@ import pe.edu.upc.spring.repository.ISizeRepository;
 import pe.edu.upc.spring.service.ISizeService;
 
 @Service
-public class SizeServiceimpl implements ISizeService {
+public class SizeServiceImpl implements ISizeService {
 
 	@Autowired
 	private ISizeRepository sSize;
 	
 	@Override
-	@Transactional(readOnly=true)
-	public boolean Insert(Size size) {
-		Size objSize=sSize.save(size);
+	@Transactional
+	public boolean Registrar(Size size) {
+		Size objSize = sSize.save(size);
 		if(objSize==null)
 			return false;
-		else 
+		else
 			return true;
 	}
-	
-	public Optional<Size> listarId(int idSize) {
-	
-		return null;
-	}
-	@Transactional(readOnly=true)
-	@Override
-	public List<Size> Listar() {
 
-		return sSize.findAll();
-	}
-	@Transactional(readOnly=true)
 	@Override
-	public List<Size> SearchName(String NameSize) {
-	
-		return sSize.SearchName(NameSize);
+	@Transactional
+	public void eliminar(int idSize) {
+		sSize.deleteById(idSize);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Size> listarId(int idSize) {
+		return sSize.findById(idSize);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Size> listar() {
+		return sSize.findAll();
 	}
 
 }

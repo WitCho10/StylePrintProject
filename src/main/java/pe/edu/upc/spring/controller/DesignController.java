@@ -16,8 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+
 import pe.edu.upc.spring.model.Design;
+import pe.edu.upc.spring.model.Designer;
 import pe.edu.upc.spring.service.IDesignService;
+import pe.edu.upc.spring.service.IDesignerService;
 
 @Controller
 @RequestMapping("/design")
@@ -25,6 +28,9 @@ public class DesignController {
 	
 	@Autowired
 	private IDesignService dService;
+	
+	@Autowired
+	private IDesignerService deService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -40,14 +46,20 @@ public class DesignController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("design", new Design());
+		model.addAttribute("designer", new Designer());
+		
+		model.addAttribute("listaDisenadores", deService.listar());
+		
 		return "design";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Design objDesign, BindingResult binRes, Model model) throws ParseException
 	{
-		if(binRes.hasErrors())
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaDisenadores", deService.listar());
 			return "design";
+		}
 		else {
 			boolean flag = dService.Registrar(objDesign);
 			if(flag)
@@ -68,7 +80,11 @@ public class DesignController {
 			return "redirect:/design/listar";
 		}
 		else {
-			model.addAttribute("design", objDesign);
+			model.addAttribute("listaDisenadores", deService.listar());
+			
+			if(objDesign.isPresent()) {
+				objDesign.ifPresent(o -> model.addAttribute("design", o));
+			}
 			return "design";
 		}
 	}
@@ -96,6 +112,13 @@ public class DesignController {
 		
 	}
 	
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model) 
+	{
+		model.addAttribute("design", new Design());
+		return "buscar";
+	}	
+	
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Design design)
 			throws ParseException
@@ -104,10 +127,6 @@ public class DesignController {
 		design.setNameDesign(design.getNameDesign());
 		listaDisenos = dService.buscarNombre(design.getNameDesign());
 		
-		if(listaDisenos.isEmpty())
-		{
-			listaDisenos=dService.buscarNombre(design.getNameDesign());
-		}
 		
 		if (listaDisenos.isEmpty()) {
 			model.put("mensaje", "No existen coincidencias");

@@ -1,53 +1,48 @@
 package pe.edu.upc.spring.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.spring.model.SaleDetail;
+import pe.edu.upc.spring.repository.ISaleDetailRepository;
 import pe.edu.upc.spring.service.ISaleDetailService;
 
-@Repository
-public class SaleDetailServiceimpl implements ISaleDetailService{
+@Service
+public class SaleDetailServiceImpl implements ISaleDetailService{
 
 	@Autowired
-	private ISaleDetailService dDetailService;
+	private ISaleDetailRepository sdSaleDetail;
 	
 	@Override
 	@Transactional
-	public boolean insertar(SaleDetail saleDetail) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Registrar(SaleDetail saledetail) {
+		SaleDetail objSaleDetail = sdSaleDetail.save(saledetail);
+		if(objSaleDetail==null)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
 	@Transactional
-	public boolean modify(SaleDetail saleDetail) {
-		// TODO Auto-generated method stub
-		return false;
+	public void eliminar(int idSaleDetail) {
+		sdSaleDetail.deleteById(idSaleDetail);
 	}
 
 	@Override
-	@Transactional
-	public void remove(int idSaleDetail) {
-		// TODO Auto-generated method stub
-		
+	@Transactional(readOnly = true)
+	public Optional<SaleDetail> listarId(int idSaleDetail) {
+		return sdSaleDetail.findById(idSaleDetail);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<SaleDetail> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Transactional
-	public List<SaleDetail> finbyid(int idSaleDetail) {
-		// TODO Auto-generated method stub
-		return null;
+		return sdSaleDetail.findAll();
 	}
 	
 
