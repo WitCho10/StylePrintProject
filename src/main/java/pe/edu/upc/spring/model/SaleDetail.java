@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,14 +32,6 @@ public class SaleDetail implements Serializable{
 	private int cant;
 	private float subTotal;
 	
-	@ManyToOne
-	@JoinColumn(name="GarmentPersonalized_id",nullable=false)
-	private GarmentPersonalized idPrenda;
-	
-	@ManyToOne
-	@JoinColumn(name="Sale_id",nullable= false)
-	private Sale idSale;
-
 	public int getIdSaleDetail() {
 		return idSaleDetail;
 	}
@@ -60,17 +50,7 @@ public class SaleDetail implements Serializable{
 	public void setSubTotal(float subTotal) {
 		this.subTotal = subTotal;
 	}
-	public GarmentPersonalized getIdPrenda() {
-		return idPrenda;
-	}
-	public void setIdPrenda(GarmentPersonalized idPrenda) {
-		this.idPrenda = idPrenda;
-	}
-	public Sale getIdSale() {
-		return idSale;
-	}
-	public void setIdSale(Sale idSale) {
-		this.idSale = idSale;
-	}
 	
-	}
+	
+	
+}

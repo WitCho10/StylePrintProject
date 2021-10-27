@@ -25,6 +25,20 @@ public class Garment implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idGarment;
 	private String nameGarment;
+	private String colorname;
+	
+	@ManyToOne
+	@JoinColumn(name="TipoPrenda_id",nullable=false)
+	private GarmentType idGarmentType;
+	
+	@ManyToOne
+	@JoinColumn(name="Proveedor_Id",nullable=false)
+	private Supplier idSupplier;
+	
+	@ManyToOne
+	@JoinColumn(name="Talla_id",nullable=false)
+	private Size idSize;
+
 	public int getIdGarment() {
 		return idGarment;
 	}
@@ -66,25 +80,11 @@ public class Garment implements Serializable  {
 	}
 
 	public Size getIdSize() {
-		return IdSize;
+		return idSize;
 	}
 
 	public void setIdSize(Size idSize) {
-		IdSize = idSize;
+		this.idSize = idSize;
 	}
-
-	private String colorname;
-	
-	@ManyToOne
-	@JoinColumn(name="GarmentType_id",nullable=false)
-	private GarmentType idGarmentType;
-	
-	@ManyToOne
-	@JoinColumn(name="supplier_id",nullable=false)
-	private Supplier idSupplier;
-	
-	@ManyToOne
-	@JoinColumn(name="Size_id",nullable=false)
-	private Size IdSize;
 }
 

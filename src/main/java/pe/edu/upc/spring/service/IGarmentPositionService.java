@@ -10,8 +10,9 @@ import pe.edu.upc.spring.model.GarmentPosition;
 public interface IGarmentPositionService {
 
 
-	public boolean Registar(GarmentPosition garmentPosition);
-	public void Eliminar(int IdGarmentPosition);
-	public Optional<GarmentPosition>ListId(int IdGarmentPosition);
-	List<GarmentPosition> Listar();
+	public boolean insert(GarmentPosition garmentPosition);
+	public boolean modify(GarmentPosition garmentPosition);
+	public void remove(int IdAdmin);
+	public Optional<GarmentPosition>ListId(int idPosition);
+	List<GarmentPosition> listar();
 }

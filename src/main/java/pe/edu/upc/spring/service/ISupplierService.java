@@ -7,10 +7,11 @@ import pe.edu.upc.spring.model.Supplier;
 
 public interface ISupplierService {
 
-	public boolean Registrar(Supplier supplier);
-	public void Eliminar(int idSupplier);
+	public boolean Insert(Supplier supplier);
+	public boolean Modify(Supplier supplier);
+	public void Remove(int idSupplier);
 	public Optional<Supplier>ListId(int idSupplier);
-	List<Supplier>Listar();
-	
+	List<Supplier>List();
+	List<Supplier>searchSupplier(String nameSupplier);
 	
 }
