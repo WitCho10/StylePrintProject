@@ -2,6 +2,7 @@ package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,33 +12,59 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="prenda")
-
+@Table(name="Prenda")
 public class Garment implements Serializable  {
 
-	public Garment() {
-		super();
-	}
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idGarment;
+	
+	@Column(name="nombrePrenda", length=60, nullable=false)
 	private String nameGarment;
-	private String colorname;
+	
+	@Column(name="nombreColor", length=60, nullable=false)
+	private String colornameGarment;
 	
 	@ManyToOne
-	@JoinColumn(name="TipoPrenda_id",nullable=false)
-	private GarmentType idGarmentType;
+	@JoinColumn(name="idGarmentType",nullable=false)
+	private GarmentType garmenttype;
 	
 	@ManyToOne
-	@JoinColumn(name="Proveedor_Id",nullable=false)
-	private Supplier idSupplier;
+	@JoinColumn(name="idSupplier",nullable=false)
+	private Supplier supplier;
 	
 	@ManyToOne
-	@JoinColumn(name="Talla_id",nullable=false)
-	private Size idSize;
+	@JoinColumn(name="idSize",nullable=false)
+	private Size size;
+	
+	@ManyToOne
+	@JoinColumn(name="idGarmentPosition",nullable=false)
+	private GarmentPosition garmentPosition;
+	
+	@ManyToOne
+	@JoinColumn(name="idAdministrator",nullable=false)
+	private Administrator administrator;
+
+	public Garment() {
+		super();
+		
+	}
+
+	public Garment(int idGarment, String nameGarment, String colornameGarment, GarmentType garmenttype,
+			Supplier supplier, Size size, GarmentPosition garmentPosition, Administrator administrator) {
+		super();
+		this.idGarment = idGarment;
+		this.nameGarment = nameGarment;
+		this.colornameGarment = colornameGarment;
+		this.garmenttype = garmenttype;
+		this.supplier = supplier;
+		this.size = size;
+		this.garmentPosition = garmentPosition;
+		this.administrator = administrator;
+	}
 
 	public int getIdGarment() {
 		return idGarment;
@@ -55,36 +82,57 @@ public class Garment implements Serializable  {
 		this.nameGarment = nameGarment;
 	}
 
-	public String getColorname() {
-		return colorname;
+	public String getColornameGarment() {
+		return colornameGarment;
 	}
 
-	public void setColorname(String colorname) {
-		this.colorname = colorname;
+	public void setColornameGarment(String colornameGarment) {
+		this.colornameGarment = colornameGarment;
 	}
 
-	public GarmentType getIdGarmentType() {
-		return idGarmentType;
+	public GarmentType getGarmenttype() {
+		return garmenttype;
 	}
 
-	public void setIdGarmentType(GarmentType idGarmentType) {
-		this.idGarmentType = idGarmentType;
+	public void setGarmenttype(GarmentType garmenttype) {
+		this.garmenttype = garmenttype;
 	}
 
-	public Supplier getIdSupplier() {
-		return idSupplier;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setIdSupplier(Supplier idSupplier) {
-		this.idSupplier = idSupplier;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
-	public Size getIdSize() {
-		return idSize;
+	public Size getSize() {
+		return size;
 	}
 
-	public void setIdSize(Size idSize) {
-		this.idSize = idSize;
+	public void setSize(Size size) {
+		this.size = size;
 	}
+
+	public GarmentPosition getGarmentPosition() {
+		return garmentPosition;
+	}
+
+	public void setGarmentPosition(GarmentPosition garmentPosition) {
+		this.garmentPosition = garmentPosition;
+	}
+
+	public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}
+
+	
+	
+
+	
 }
 

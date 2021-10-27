@@ -12,44 +12,37 @@ import pe.edu.upc.spring.repository.IGarmentPositionRepository;
 import pe.edu.upc.spring.service.IGarmentPositionService;
 
 @Service
-public class GarmentPositionServiceimpl implements IGarmentPositionService{
+public class GarmentPositionServiceImpl implements IGarmentPositionService{
 
 	@Autowired
-	private IGarmentPositionRepository dGarmentPosition;
+	private IGarmentPositionRepository gpGarmentPosition;
 	
 	@Override
 	@Transactional
-	public boolean insert(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Registrar(GarmentPosition garmentposition) {
+		GarmentPosition objGarmentPosition = gpGarmentPosition.save(garmentposition);
+		if(objGarmentPosition==null)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
 	@Transactional
-	public boolean modify(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
+	public void eliminar(int idGarmentPosition) {
+		gpGarmentPosition.deleteById(idGarmentPosition);
 	}
 
 	@Override
-	@Transactional
-	public void remove(int IdAdmin) {
-		// TODO Auto-generated method stub
-		
+	@Transactional(readOnly = true)
+	public Optional<GarmentPosition> listarId(int idGarmentPosition) {
+		return gpGarmentPosition.findById(idGarmentPosition);
 	}
 
 	@Override
-	@Transactional
-	public Optional<GarmentPosition> ListId(int idPosition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<GarmentPosition> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return gpGarmentPosition.findAll();
 	}
 
 }

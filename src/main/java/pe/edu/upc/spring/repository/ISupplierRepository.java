@@ -13,5 +13,5 @@ import pe.edu.upc.spring.model.Supplier;
 public interface ISupplierRepository extends JpaRepository<Supplier , Integer>{
 	
 	@Query("from Supplier s where s.nameSupplier like %:nameSupplier%")
-	List<Supplier> searchSupplier(@Param("nameSupplier")String nameSupplier);
+	List<Supplier> buscarNombre(@Param("nameSupplier")String nameSupplier);
 }

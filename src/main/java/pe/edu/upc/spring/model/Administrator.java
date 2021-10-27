@@ -10,69 +10,108 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Administrator")
+@Table(name="Administrador")
 public class Administrator implements Serializable{
 	
-	public Administrator(int idAdmin, String nameAdmin, int dNI, int phoneNumber, String email, String password) {
-		super();
-		IdAdmin = idAdmin;
-		this.nameAdmin = nameAdmin;
-		DNI = dNI;
-		PhoneNumber = phoneNumber;
-		Email = email;
-		Password = password;
-	}
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idAdministrator;
+	
+
+	@Column(name="nombreAdministradorn",length=60,nullable=false)
+	private String nameAdministrator;
+	
+	@Column(name="apellidoAdministrador",length=60,nullable=false)
+	private String lastnameAdministrator;
+	
+	@Column(name="dniAdministrador",length=60,nullable=false)
+	private int dniAdministrator;
+	
+	@Column(name="celularAdministrador",length=60,nullable=false)
+	private int phoneAdministrator;
+	
+	@Column(name="correoAdministrador",length=60,nullable=false)
+	private String emailAdministrator;
+	
+	@Column(name="contrasenaAdministrador",length=60,nullable=false)
+	private String passwordAdministrator;
 	
 	public Administrator() {
 		super();
 	}
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-		
-	private int IdAdmin	;
 
-	@Column(name="nombreAdmin",nullable=false)
-	private String nameAdmin;	
-	private int DNI;
-	private int PhoneNumber;
-	private String Email;
-	private String Password;
+	public Administrator(int idAdministrator, String nameAdministrator, String lastnameAdministrator,
+			int dniAdministrator, int phoneAdministrator, String emailAdministrator, String passwordAdministrator) {
+		super();
+		this.idAdministrator = idAdministrator;
+		this.nameAdministrator = nameAdministrator;
+		this.lastnameAdministrator = lastnameAdministrator;
+		this.dniAdministrator = dniAdministrator;
+		this.phoneAdministrator = phoneAdministrator;
+		this.emailAdministrator = emailAdministrator;
+		this.passwordAdministrator = passwordAdministrator;
+	}
+
+	public int getIdAdministrator() {
+		return idAdministrator;
+	}
+
+	public void setIdAdministrator(int idAdministrator) {
+		this.idAdministrator = idAdministrator;
+	}
+
+	public String getNameAdministrator() {
+		return nameAdministrator;
+	}
+
+	public void setNameAdministrator(String nameAdministrator) {
+		this.nameAdministrator = nameAdministrator;
+	}
+
+	public String getLastnameAdministrator() {
+		return lastnameAdministrator;
+	}
+
+	public void setLastnameAdministrator(String lastnameAdministrator) {
+		this.lastnameAdministrator = lastnameAdministrator;
+	}
+
+	public int getDniAdministrator() {
+		return dniAdministrator;
+	}
+
+	public void setDniAdministrator(int dniAdministrator) {
+		this.dniAdministrator = dniAdministrator;
+	}
+
+	public int getPhoneAdministrator() {
+		return phoneAdministrator;
+	}
+
+	public void setPhoneAdministrator(int phoneAdministrator) {
+		this.phoneAdministrator = phoneAdministrator;
+	}
+
+	public String getEmailAdministrator() {
+		return emailAdministrator;
+	}
+
+	public void setEmailAdministrator(String emailAdministrator) {
+		this.emailAdministrator = emailAdministrator;
+	}
+
+	public String getPasswordAdministrator() {
+		return passwordAdministrator;
+	}
+
+	public void setPasswordAdministrator(String passwordAdministrator) {
+		this.passwordAdministrator = passwordAdministrator;
+	}
+
 	
-	public int getIdAdmin() {
-		return IdAdmin;
-	}
-	public void setIdAdmin(int idAdmin) {
-		IdAdmin = idAdmin;
-	}
-	public String getNameAdmin() {
-		return nameAdmin;
-	}
-	public void setNameAdmin(String nameAdmin) {
-		this.nameAdmin = nameAdmin;
-	}
-	public int getDNI() {
-		return DNI;
-	}
-	public void setDNI(int dNI) {
-		DNI = dNI;
-	}
-	public int getPhoneNumber() {
-		return PhoneNumber;
-	}
-	public void setPhoneNumber(int phoneNumber) {
-		PhoneNumber = phoneNumber;
-	}
-	public String getEmail() {
-		return Email;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
+
+	
+	
 }
