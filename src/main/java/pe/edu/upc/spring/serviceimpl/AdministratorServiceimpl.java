@@ -1,3 +1,4 @@
+package pe.edu.upc.spring.serviceimpl;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,44 +11,43 @@ import pe.edu.upc.spring.repository.IAdministratorRepository;
 import pe.edu.upc.spring.service.IAdministratorService;
 
 @Service
-public class AdministratorServiceimpl implements IAdministratorService{
+public class AdministratorServiceImpl implements IAdministratorService{
 
 	@Autowired
 	private IAdministratorRepository aAdministrator;
 	
 	@Override
 	@Transactional
-	public boolean insert(Administrator administrator) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Registrar(Administrator administrator) {
+		Administrator objAdministrator = aAdministrator.save(administrator);
+		if(objAdministrator==null)
+			return false;
+		else
+			return true;
+	}
+	
+	@Override
+	@Transactional
+	public void eliminar(int idAdministrator) {
+		aAdministrator.deleteById(idAdministrator);
 	}
 
 	@Override
-	@Transactional
-	public boolean modify(Administrator administrator) {
-		// TODO Auto-generated method stub
-		return false;
+	@Transactional(readOnly = true)
+	public Optional<Administrator> listarId(int idAdministrator) {
+		return aAdministrator.findById(idAdministrator);
 	}
 
 	@Override
-	@Transactional
-	public void remove(int IdAdmin) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	@Transactional
-	public Optional<Administrator> ListId(int IdAdmin) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Administrator> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return aAdministrator.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Administrator> buscarNombre(String nameAdministrator) {
+		return aAdministrator.buscarNombre(nameAdministrator);
 	}
 
 }

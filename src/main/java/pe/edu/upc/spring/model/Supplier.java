@@ -13,35 +13,41 @@ import javax.persistence.Table;
 @Table(name="Proveedor")
 public class Supplier implements Serializable {
 
-	public Supplier(int idSupplier, String nameSupplier, int phonenumber, String address) {
-		super();
-		this.idSupplier = idSupplier;
-		this.nameSupplier = nameSupplier;
-		this.phonenumber = phonenumber;
-		Address = address;
-	}
+	
 	private static final long serialVersionUID = 1L;
 	
-	public Supplier() {
-		super();
-		
-	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idSupplier;
 	
-	@Column(name="NombreProveedor", length=60,nullable=false)
+	@Column(name="nombreProveedor", length=60,nullable=false)
 	private String nameSupplier;
 	
 
-	private int phonenumber;
+	@Column(name="celularProveedor", length=100,nullable=false)
+	private int phoneSupplier;
 	
-	@Column(name="NombreDireccion", length=100,nullable=false)
-	private String Address;
+	@Column(name="direccionProveedor", length=100,nullable=false)
+	private String addressSupplier;
+
+	public Supplier() {
+		super();
+		
+	}
+
+	public Supplier(int idSupplier, String nameSupplier, int phoneSupplier, String addressSupplier) {
+		super();
+		this.idSupplier = idSupplier;
+		this.nameSupplier = nameSupplier;
+		this.phoneSupplier = phoneSupplier;
+		this.addressSupplier = addressSupplier;
+	}
 
 	public int getIdSupplier() {
 		return idSupplier;
 	}
+
 	public void setIdSupplier(int idSupplier) {
 		this.idSupplier = idSupplier;
 	}
@@ -49,22 +55,26 @@ public class Supplier implements Serializable {
 	public String getNameSupplier() {
 		return nameSupplier;
 	}
+
 	public void setNameSupplier(String nameSupplier) {
 		this.nameSupplier = nameSupplier;
 	}
-	public int getPhonenumber() {
-		return phonenumber;
+
+	public int getPhoneSupplier() {
+		return phoneSupplier;
 	}
-	public void setPhonenumber(int phonenumber) {
-		this.phonenumber = phonenumber;
+
+	public void setPhoneSupplier(int phoneSupplier) {
+		this.phoneSupplier = phoneSupplier;
 	}
-	public String getAddress() {
-		return Address;
+
+	public String getAddressSupplier() {
+		return addressSupplier;
 	}
-	public void setAddress(String address) {
-		Address = address;
+
+	public void setAddressSupplier(String addressSupplier) {
+		this.addressSupplier = addressSupplier;
 	}
-	
-	
+
 	
 }

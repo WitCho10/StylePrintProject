@@ -12,9 +12,7 @@ import pe.edu.upc.spring.model.Administrator;
 @Repository
 public interface IAdministratorRepository extends JpaRepository<Administrator, Integer> {
 	
-
-	@Query("from Administrator a where a.Email=? and p.Password =?")
-	List<Administrator>searchName(@Param("nameAdmin")String nameAdmin);
-	
+	@Query("from Administrator p where p.nameAdministrator like %:nameAdministrator%")
+	List<Administrator> buscarNombre(@Param("nameAdministrator") String nameAdministrator);
 	
 }

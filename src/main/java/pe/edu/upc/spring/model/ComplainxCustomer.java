@@ -17,8 +17,6 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-
-
 @Entity
 @Table(name="QuejaxCliente")
 public class ComplainxCustomer implements Serializable{

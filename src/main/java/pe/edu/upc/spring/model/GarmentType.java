@@ -13,34 +13,42 @@ import javax.persistence.Table;
 @Table(name="TipoPrenda")
 public class GarmentType implements Serializable  {
 	
-	public GarmentType(int idGarmentType, String nameGarmentType) {
-		super();
-		this.idGarmentType = idGarmentType;
-		this.nameGarmentType = nameGarmentType;
-	}
-	public GarmentType() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idGarmentType;
 	
-	@Column(name="NombreTipoPrenda", length=60,nullable=false)
+	@Column(name="nombreTipoPrenda", length=60,nullable=false)
 	private String nameGarmentType;
-	
+
+	public GarmentType() {
+		super();
+		
+	}
+
+	public GarmentType(int idGarmentType, String nameGarmentType) {
+		super();
+		this.idGarmentType = idGarmentType;
+		this.nameGarmentType = nameGarmentType;
+	}
+
 	public int getIdGarmentType() {
 		return idGarmentType;
 	}
+
 	public void setIdGarmentType(int idGarmentType) {
 		this.idGarmentType = idGarmentType;
 	}
+
 	public String getNameGarmentType() {
 		return nameGarmentType;
 	}
+
 	public void setNameGarmentType(String nameGarmentType) {
 		this.nameGarmentType = nameGarmentType;
 	}
+	
+	
 }

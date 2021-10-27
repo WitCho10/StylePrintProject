@@ -15,8 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.model.CustomerxDesign;
+import pe.edu.upc.spring.model.Design;
+import pe.edu.upc.spring.service.ICustomerService;
 import pe.edu.upc.spring.service.ICustomerxDesignService;
+import pe.edu.upc.spring.service.IDesignService;
 
 @Controller
 @RequestMapping("/customerxdesign")
@@ -24,6 +28,12 @@ public class CustomerxDesignController {
 	
 	@Autowired
 	private ICustomerxDesignService cdService;
+	
+	@Autowired
+	private ICustomerService cuService;	
+	
+	@Autowired
+	private IDesignService deService;	
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -39,14 +49,23 @@ public class CustomerxDesignController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("customerxdesign", new CustomerxDesign());
+		model.addAttribute("customer", new Customer());
+		model.addAttribute("design", new Design());
+		
+		model.addAttribute("listaClientes", cuService.listar());
+		model.addAttribute("listaDisenos", deService.listar());
+		
 		return "customerxdesign";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute CustomerxDesign objCustomerxDesign, BindingResult binRes, Model model) throws ParseException
 	{
-		if(binRes.hasErrors())
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaClientes", cuService.listar());
+		    model.addAttribute("listaDisenos", deService.listar());
 			return "customerxdesign";
+		}
 		else {
 			boolean flag = cdService.Registrar(objCustomerxDesign);
 			if(flag)
@@ -67,7 +86,12 @@ public class CustomerxDesignController {
 			return "redirect:/customerxdesign/listar";
 		}
 		else {
-			model.addAttribute("customerxdesign", objCustomerxDesign);
+			model.addAttribute("listaClientes", cuService.listar());
+			model.addAttribute("listaDisenos", deService.listar());
+			if(objCustomerxDesign.isPresent()) {
+				objCustomerxDesign.ifPresent(o -> model.addAttribute("customerxdesign", o));
+			}
+
 			return "customerxdesign";
 		}
 	}

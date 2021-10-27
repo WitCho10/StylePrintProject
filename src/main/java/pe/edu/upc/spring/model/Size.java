@@ -10,40 +10,46 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Size")
+@Table(name="Talla")
 public class Size implements Serializable{
 
-	public Size(int idSize, String nameSize) {
-		super();
-		IdSize = idSize;
-		NameSize = nameSize;
-	}
-	public Size() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSize;
 	
-	private int IdSize;
-	
-	@Column(name="NombreTalla", length=60,nullable=false)
-	private String NameSize;
-	
+	@Column(name="nombreTalla", length=60,nullable=false)
+	private String nameSize;
+
+	public Size() {
+		super();
+		
+	}
+
+	public Size(int idSize, String nameSize) {
+		super();
+		this.idSize = idSize;
+		this.nameSize = nameSize;
+	}
+
 	public int getIdSize() {
-		return IdSize;
+		return idSize;
 	}
+
 	public void setIdSize(int idSize) {
-		IdSize = idSize;
+		this.idSize = idSize;
 	}
+
 	public String getNameSize() {
-		return NameSize;
+		return nameSize;
 	}
+
 	public void setNameSize(String nameSize) {
-		NameSize = nameSize;
+		this.nameSize = nameSize;
 	}
+	
 	
 	
 }
