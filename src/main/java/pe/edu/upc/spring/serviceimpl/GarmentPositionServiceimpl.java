@@ -16,39 +16,34 @@ public class GarmentPositionServiceimpl implements IGarmentPositionService{
 
 	@Autowired
 	private IGarmentPositionRepository dGarmentPosition;
-	
-	@Override
-	@Transactional
-	public boolean insert(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	@Transactional
-	public boolean modify(GarmentPosition garmentPosition) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Insertar(GarmentPosition garmentPosition) {
+		GarmentPosition objGarmentPosition = dGarmentPosition.save(garmentPosition);
+		if(objGarmentPosition==null)
+			return false;
+		else
+			return true;
 	}
-
 	@Override
 	@Transactional
-	public void remove(int IdAdmin) {
-		// TODO Auto-generated method stub
+	public void Eliminar(int idPosition) {
+		dGarmentPosition.deleteById(idPosition);
 		
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Optional<GarmentPosition> ListId(int idPosition) {
 		// TODO Auto-generated method stub
-		return null;
+		return dGarmentPosition.findById(idPosition);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<GarmentPosition> listar() {
-		// TODO Auto-generated method stub
+		dGarmentPosition.findAll();
 		return null;
 	}
 

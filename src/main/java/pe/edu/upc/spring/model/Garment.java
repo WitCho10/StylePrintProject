@@ -28,16 +28,24 @@ public class Garment implements Serializable  {
 	private String colorname;
 	
 	@ManyToOne
-	@JoinColumn(name="TipoPrenda_id",nullable=false)
+	@JoinColumn(name="GarmentType_id",nullable=false)
 	private GarmentType idGarmentType;
 	
 	@ManyToOne
-	@JoinColumn(name="Proveedor_Id",nullable=false)
+	@JoinColumn(name="supplier_id",nullable=false)
 	private Supplier idSupplier;
 	
 	@ManyToOne
-	@JoinColumn(name="Talla_id",nullable=false)
-	private Size idSize;
+	@JoinColumn(name="Size_id",nullable=false)
+	private Size IdSize;
+
+	public Size getIdSize() {
+	return IdSize;
+}
+
+	public void setIdSize(Size idSize) {
+	IdSize = idSize;
+}
 
 	public int getIdGarment() {
 		return idGarment;
@@ -77,14 +85,6 @@ public class Garment implements Serializable  {
 
 	public void setIdSupplier(Supplier idSupplier) {
 		this.idSupplier = idSupplier;
-	}
-
-	public Size getIdSize() {
-		return idSize;
-	}
-
-	public void setIdSize(Size idSize) {
-		this.idSize = idSize;
 	}
 }
 

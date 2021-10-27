@@ -15,34 +15,43 @@ import pe.edu.upc.spring.service.IGarmentPersonalizedService;
 public class GarmentPersonalizedServiceimpl implements  IGarmentPersonalizedService{
 
 	@Autowired
-	private IGarmentPersonalizedRepository gGarmentPersonalized;
 	
+	private IGarmentPersonalizedRepository gGarmentPersonalized;
+
 	@Override
 	@Transactional
-	public boolean insertar(GarmentPersonalized garmentpersonalized) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Insertar(GarmentPersonalized garmentpersonalized) {
+		
+		GarmentPersonalized objGarmentPersonalized = gGarmentPersonalized.save(garmentpersonalized);
+		if(objGarmentPersonalized==null)
+			return false;
+		else
+			return true;
+	
 	}
 
 	@Override
 	@Transactional
-	public boolean modificar(GarmentPersonalized garmentpersonalized) {
-		// TODO Auto-generated method stub
-		return false;
+	public void Eliminar(int idGarmentPersonalized) {
+	
+		gGarmentPersonalized.deleteById(idGarmentPersonalized);	
 	}
 
 	@Override
 	@Transactional
 	public Optional<GarmentPersonalized> listarId(int idGarmentPersonalized) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return gGarmentPersonalized.findById(idGarmentPersonalized);
 	}
 
 	@Override
 	@Transactional
 	public List<GarmentPersonalized> listar() {
 		// TODO Auto-generated method stub
-		return null;
+		return gGarmentPersonalized.findAll();
 	}
+	
 
+	
+	
 }

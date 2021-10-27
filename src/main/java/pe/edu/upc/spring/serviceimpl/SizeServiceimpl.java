@@ -20,7 +20,7 @@ public class SizeServiceimpl implements ISizeService {
 	
 	@Override
 	@Transactional(readOnly=true)
-	public boolean Insert(Size size) {
+	public boolean Insertar(Size size) {
 		Size objSize=sSize.save(size);
 		if(objSize==null)
 			return false;
@@ -28,21 +28,22 @@ public class SizeServiceimpl implements ISizeService {
 			return true;
 	}
 	
-	public Optional<Size> listarId(int idSize) {
-	
-		return null;
-	}
-	@Transactional(readOnly=true)
 	@Override
-	public List<Size> Listar() {
+	@Transactional
+	public void Eliminar (int idSize) {
+	sSize.deleteById(idSize);
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Optional<Size> ListarId(int idSize){
+		return sSize.findById(idSize);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Size> Listar() { 
 
 		return sSize.findAll();
 	}
-	@Transactional(readOnly=true)
-	@Override
-	public List<Size> SearchName(String NameSize) {
-	
-		return sSize.SearchName(NameSize);
-	}
-
 }
