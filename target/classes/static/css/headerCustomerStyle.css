@@ -1,0 +1,11 @@
+:root{
+    -primary: #094977;
+    --light: #FFF;
+    --grey: #efefef;
+}
+body{
+    overflow:hidden;
+    font-weight: 300;
+    color: var(--primary);
+    background-color: #1E2126
+}

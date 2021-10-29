@@ -27,12 +27,17 @@ public class CustomerServiceImpl implements ICustomerService{
 			return true;
 	}
 	
+//	@Override
+//	public Customer login(String username, String Password) {
+//		Customer user = cCustomer.findByUsernameAndPassword(username, Password);
+//		return user;
+//	}
+	
 	@Override
 	@Transactional
 	public void eliminar(int idCustomer) {
 		cCustomer.deleteById(idCustomer);
-	}
-
+	}	
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Customer> listarId(int idCustomer) {
@@ -51,5 +56,11 @@ public class CustomerServiceImpl implements ICustomerService{
 		return cCustomer.buscarNombre(nameCustomer);
 	}
 	
+//	@Override
+//	@Transactional(readOnly = true)
+//	public Customer login(String emailCustomer, String passwordCustomer){
+//		Customer getCustomer = cCustomer.buscarPorUsernameYPassword(emailCustomer, passwordCustomer);
+//		return getCustomer;
+//	}
 }
 
