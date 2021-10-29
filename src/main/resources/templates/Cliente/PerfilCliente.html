@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html 
+xmlns:th="http://www.thymeleaf.org" 
+lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
    
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <link rel="stylesheet" href="../../static/css/PerfilCliente.css">
-    <link rel="stylesheet" href="../../static/css/Sidebarstyle.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->  
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/PerfilCliente.css}">
+     <link rel="stylesheet" th:href="@{/css/Sidebarstyle.css}">
+   <!--  <link rel="stylesheet" href="@{/css/Sidebarstyle.css}">-->
+    <!--  <link rel="stylesheet" th:href="@{/css/Sidebarstyle.css}">-->
     <title>Document</title>
 </head>
 <body>
   <div th:replace="fragments/headerCustomer :: headerCustomer"></div>
-  <div th:replace="fragments/sideBarCustomer :: sideBarCustomer">
-    <div class="card text-white bg-dark col-sm-4 p-4 h-60 position-absolute top-80 start-50" style="width: 18rem;">
-      <img src="../../static/imagenes/PoloNegro.jpg" class="card-img-top" alt="...">
+  <div class="card text-white bg-dark col-sm-4 p-4 h-60 position-absolute top-80 start-50" style="width: 18rem;">
+      <img th:src="@{/imagenes/PoloNegro.jpg}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">Alexander Talledo Carranza</h5>
         <p class="card-text">Alexander_talledo1@hotmail.com</p>
-        <a href="../EditarPerfil.html" class="btn btn-primary">Editar perfil</a>
+        <a href="/customer/modificar" class="btn btn-primary">Editar perfil</a>
       </div>
-    </div>
+   </div>
+  <div th:replace="fragments/sideBarCustomer :: sideBarCustomer">
+    
   </div>
 
   <!-- <nav class="navbar navbar-light bg-dark">

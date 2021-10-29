@@ -15,5 +15,8 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer>{
 
 	@Query("from Customer d where d.nameCustomer like %:nameCustomer%")
 	List<Customer> buscarNombre(@Param("nameCustomer") String nameCustomer);
+	
+//	@Query("from Customer d where d.emailCustomer=? and d.passwordCustomer=?")
+//	Customer buscarPorUsernameYPassword(String emailCustomer, String passwordCustomer);
 
 }

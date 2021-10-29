@@ -2,6 +2,7 @@ package pe.edu.upc.spring.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,20 +30,47 @@ public class CustomerController {
 	private ICustomerService cService;
 	
 	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
-		return "bienvenido";
+	public String irPaginaBienvenida(Model model) {
+		model.addAttribute("customer",new Customer());
+		return "Cliente/LoginCliente";
 	}
-	
+	@RequestMapping("/perfil")
+	public String irPaginaInicio(Model model) {
+		model.addAttribute("customer", new Customer());
+		return "Cliente/PerfilCliente";
+	}
+//	@PostMapping("/bienvenido")
+//	public String Login(@ModelAttribute("customer") Customer customer ) {
+//		Customer authCustomer = cService.login(customer.getEmailCustomer(),customer.getPasswordCustomer());
+//		System.out.print("authCustomer");
+//		if(Objects.nonNull(authCustomer)) {
+//			return "redirect:/Customer/perfil";
+//		}else {
+//			return "redirect:/Customer/bienvenido";
+//		}
+//			
+//	}
 	@RequestMapping("/")
 	public String irPaginaListadoEstados(Map<String, Object> model) {
 		model.put("listaClientes",cService.listar());
 		return "listCustomer";
 	}
+	@RequestMapping("/nuevaCompra")
+	public String RealizarCompra(Model model){
+		model.addAttribute("customer", new Customer());
+		return "Cliente/RealizarCompra";		
+	}
+	@RequestMapping("/queja")
+	public String RealizarQueja(Model model) {
+		model.addAttribute("customer",new Customer());
+		return "Cliente/RealizarQueja";
+	}
+	
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("customer", new Customer());
-		return "customer";
+		return "Cliente/CrearCuentaCliente";
 	}
 	
 	@RequestMapping("/registrar")
@@ -52,7 +81,7 @@ public class CustomerController {
 		else {
 			boolean flag = cService.Registrar(objCustomer);
 			if(flag)
-				return "redirect:/customer/listar";
+				return "redirect:/customer/bienvenido";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
 				return "redirect:/customer/irRegistrar";				
@@ -66,11 +95,11 @@ public class CustomerController {
 		Optional<Customer> objCustomer = cService.listarId(id);
 		if(objCustomer == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/customer/listar";
+			return "redirect:/customer/bienvenido";
 		}
 		else {
 			model.addAttribute("customer", objCustomer);
-			return "customer";
+			return "Cliente/EditarPerfil";
 		}
 	}
 	
