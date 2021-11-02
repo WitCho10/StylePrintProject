@@ -27,7 +27,7 @@ public class ComplainController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "Quejas";
 	}
 	
 	@RequestMapping("/")
@@ -38,22 +38,22 @@ public class ComplainController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("complain", new Complain());
-		return "complain";
+		model.addAttribute("Queja", new Complain());
+		return "Quejas";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Complain objComplain, BindingResult binRes, Model model) throws ParseException
 	{
 		if(binRes.hasErrors())
-			return "complain";
+			return "Quejas";
 		else {
 			boolean flag = cService.Registrar(objComplain);
 			if(flag)
-				return "redirect:/complain/listar";
+				return "redirect:/Quejas/listar";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
-				return "redirect:/complain/irRegistrar";				
+				return "redirect:/Quejas/irRegistrar";				
 			}			
 		}		
 	}

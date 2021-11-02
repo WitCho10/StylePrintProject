@@ -28,7 +28,7 @@ public class AdministratorController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "InicioAdministrador";
 	}
 	
 	@RequestMapping("/")
@@ -40,14 +40,14 @@ public class AdministratorController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("administrator", new Administrator());
-		return "administrator";
+		return "MenuAdministrador";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Administrator objAdministrator, BindingResult binRes, Model model) throws ParseException
 	{
 		if(binRes.hasErrors())
-			return "administrator";
+			return "MenuAdministrador";
 		else {
 			boolean flag = aService.Registrar(objAdministrator);
 			if(flag)

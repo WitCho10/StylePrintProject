@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link
-    rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"
+    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"
   />
    
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
     <title>Document</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
     </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="MenuCliente.html">Styleprint</a>
+      <a class="navbar-brand" th:href="MenuCliente.html">Styleprint</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="#">UserName</a>
@@ -34,11 +34,11 @@
       <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="menu">
-                <a href="MenuCliente.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
-                <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-cart mr-2 lead"></i>Mis compras</a>
-                <a href="Compra.html" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Realizar Compra</a>
-                <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Diseños disponibles</a>
-                <a href="Quejas.html" class="d-block p-3" style="color: white;"><i class="fas fa-exclamation-circle mr-2 lead"></i>Realizar Queja</a>
+                <a th:href="MenuCliente.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
+                <a th:href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-cart mr-2 lead"></i>Mis compras</a>
+                <a th:href="Compra.html" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Realizar Compra</a>
+                <a th:href="" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Diseños disponibles</a>
+                <a th:href="Quejas.html" class="d-block p-3" style="color: white;"><i class="fas fa-exclamation-circle mr-2 lead"></i>Realizar Queja</a>
             </div>
         </div>
         <div class="container">

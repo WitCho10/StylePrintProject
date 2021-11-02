@@ -34,7 +34,7 @@ public class DesignController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "MenuDiseñador";
 	}
 	
 	@RequestMapping("/")

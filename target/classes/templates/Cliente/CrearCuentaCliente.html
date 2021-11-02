@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style5.css" th:href="@{/css/style5.css}">
-    <title>Regístrate</title>
+   
+    <link rel="stylesheet" href="../../static/css/ClienteCuentaStyle.css">
+    
+    <title>Crear cuenta de cliente</title>
 </head>
-<body>
+<body>   
     <div class="card col-sm-6 p-3 h-25">
         <form>
-            <h2 class="textbox">Crea tu cuenta de diseñador</h2>
+            <h2 class="textbox">Crea tu cuenta de cliente</h2>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nombres</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">                
@@ -36,15 +39,20 @@
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Celular</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu número de celular">
+                
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Apodo</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Usuario12345">
+                <label for="exampleInputPassword1" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu dirección">
+                
               </div>
-              <button type="submit" class="btn btn-primary"><a th:href="@{designer/bienvenido}">Regístrate ahora</a></button>
+            <button type="submit" class="btn btn-primary" position-relative>
+                Regístrate ahora</span>
+            </button>
                     <h6>¿Ya tienes cuenta?</h6>
-                    <h6 class="textIniciar">Inicia sesión</h6>
+                    <!-- <h6 class="textIniciar">Inicia sesión</h6> -->
+                    <a class="textIniciar" href="">Iniciar sesión</a>                    
           </form>
     </div>
 </body>
-</html>
+</html>l

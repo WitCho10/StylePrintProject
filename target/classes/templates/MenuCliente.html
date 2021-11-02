@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <link
     rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
    
-    <link rel="stylesheet" href="css/style8.css">
+    <link rel="stylesheet" href="static/css/style8.css">
     <title>Document</title>
 </head>
 <body style="overflow: hidden;">
@@ -18,7 +18,7 @@
         </button>
 
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a class="navbar-brand" href="MenuCliente.html">Styleprint</a>
+          <a class="navbar-brand" th:href="MenuCliente.html">Styleprint</a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="#">UserName</a>
@@ -28,16 +28,16 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="buscar">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-            <a class="nav-link" href="MenuCliente.html">Home<span class="sr-only">(current)</span><i class="fas fa-home lead"></i></a>
+            <a class="nav-link" th:href="MenuCliente.html">Home<span class="sr-only">(current)</span><i class="fas fa-home lead"></i></a>
     </nav>
       <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="menu">
-                <a href="MenuCliente.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
-                <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-cart mr-2 lead"></i>Mis compras</a>
-                <a href="Compra.html" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Realizar Compra</a>
-                <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Diseños disponibles</a>
-                <a href="Quejas.html" class="d-block p-3" style="color: white;"><i class="fas fa-exclamation-circle mr-2 lead"></i>Realizar Queja</a>
+                <a th:href="MenuCliente.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
+                <a th:href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-cart mr-2 lead"></i>Mis compras</a>
+                <a th:href="Compra.html" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Realizar Compra</a>
+                <a th:href="" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Diseños disponibles</a>
+                <a th:href="Quejas.html" class="d-block p-3" style="color: white;"><i class="fas fa-exclamation-circle mr-2 lead"></i>Realizar Queja</a>
             </div>
         </div>
         <div class="container">
@@ -61,7 +61,7 @@
             <h5 class="card-title">USERNAME</h5>
             <p class="card-text">CORREO</p>
           </div>
-          <button type="button" class="btn1 btn-primary"><a href="EditarPerfil.html">Editar Perfil</a></button></center>
+          <button type="button" class="btn1 btn-primary"><a th:href="EditarPerfil.html">Editar Perfil</a></button></center>
         </div>
       </div>
     </div>

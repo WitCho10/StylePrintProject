@@ -29,7 +29,7 @@ public class CustomerController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "InicioCliente";
 	}
 	
 	@RequestMapping("/")
@@ -40,22 +40,22 @@ public class CustomerController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("customer", new Customer());
-		return "customer";
+		model.addAttribute("MenuCliente", new Customer());
+		return "MenuCliente";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Customer objCustomer, BindingResult binRes, Model model) throws ParseException
 	{
 		if(binRes.hasErrors())
-			return "customer";
+			return "CuentaCliente";
 		else {
 			boolean flag = cService.Registrar(objCustomer);
 			if(flag)
-				return "redirect:/customer/listar";
+				return "redirect:/CuentaCliente/listar";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
-				return "redirect:/customer/irRegistrar";				
+				return "redirect:/CuentaCliente/irRegistrar";				
 			}			
 		}		
 	}

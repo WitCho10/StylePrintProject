@@ -29,7 +29,12 @@ public class DesignerController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "InicioDiseñador";
+	}
+	
+	@RequestMapping("/irPerfil")
+	public String irPaginaInicio() {
+		return "MenuDiseñador";
 	}
 	
 	@RequestMapping("/")
@@ -41,7 +46,7 @@ public class DesignerController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("designer", new Designer());
-		return "designer";
+		return "CuentaDiseñador";
 	}
 	
 	@RequestMapping("/registrar")
@@ -52,10 +57,10 @@ public class DesignerController {
 		else {
 			boolean flag = dService.Registrar(objDesigner);
 			if(flag)
-				return "redirect:/designer/listar";
+				return "redirect:/designer/bienvenido";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
-				return "redirect:/designer/irRegistrar";				
+				return "redirect:/designer/bienvenido";				
 			}			
 		}		
 	}
@@ -66,11 +71,11 @@ public class DesignerController {
 		Optional<Designer> objDesigner = dService.listarId(id);
 		if(objDesigner == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/designer/listar";
+			return "redirect:/EditarPerfilDiseñador";
 		}
 		else {
-			model.addAttribute("designer", objDesigner);
-			return "designer";
+			model.addAttribute("EditarPerfilDiseñador", objDesigner);
+			return "EditarPerfilDiseñador";
 		}
 	}
 	
