@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link
-    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
-   
-    <link rel="stylesheet" href="static/css/style8.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="static/css/style8.css" th:href="@{/css/style8.css}">
     <title>Document</title>
 </head>
 <body style="overflow: hidden;">
@@ -34,7 +32,7 @@
         <div id="sidebar-container" class="bg-primary">
             <div class="menu">
                 <a th:href="MenuDiseñador.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
-                <a th:href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
+                <a class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
                 <a th:href="Estampado.html" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Publicar diseño</a>
             </div>
         </div>

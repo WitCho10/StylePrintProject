@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-
 import pe.edu.upc.spring.model.Designer;
 import pe.edu.upc.spring.service.IDesignerService;
 
@@ -28,12 +27,14 @@ public class DesignerController {
 	private IDesignerService dService;
 	
 	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
+	public String irPaginaBienvenida(Model model) {
+		model.addAttribute("designer",new Designer());
 		return "InicioDiseñador";
 	}
 	
-	@RequestMapping("/irPerfil")
-	public String irPaginaInicio() {
+	@RequestMapping("/perfil")
+	public String irPaginaInicio(Model model) {
+		model.addAttribute("designer", new Designer());
 		return "MenuDiseñador";
 	}
 	
@@ -71,7 +72,7 @@ public class DesignerController {
 		Optional<Designer> objDesigner = dService.listarId(id);
 		if(objDesigner == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/EditarPerfilDiseñador";
+			return "redirect:/designer/bienvenido";
 		}
 		else {
 			model.addAttribute("EditarPerfilDiseñador", objDesigner);

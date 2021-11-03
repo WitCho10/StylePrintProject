@@ -31,10 +31,27 @@ public class AdministratorController {
 		return "InicioAdministrador";
 	}
 	
+	public String irPaginaBienvenida(Model model) {
+		model.addAttribute("administrator",new Administrator());
+		return "InicioAdministrador";
+	}
+	
+	@RequestMapping("/perfil")
+	public String irPaginaInicio(Model model) {
+		model.addAttribute("administrator", new Administrator());
+		return "MenuAdministrador";
+	}
+	
 	@RequestMapping("/")
 	public String irPaginaListadoEstados(Map<String, Object> model) {
 		model.put("listaAdministradores",aService.listar());
 		return "listAdministrator";
+	}
+	
+	@RequestMapping("/editarperfil")
+	public String irPaginaEditar(Model model) {
+		model.addAttribute("administrator", new Administrator());
+		return "EditarPerfilAdministrador";
 	}
 	
 	@RequestMapping("/irRegistrar")
