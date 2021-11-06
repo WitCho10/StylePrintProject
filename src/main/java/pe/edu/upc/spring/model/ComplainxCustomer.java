@@ -42,7 +42,7 @@ public class ComplainxCustomer implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name="fechaQueja")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date dateComplainxCustomer;
+	private Date dateComplainxCustomer = new Date(System.currentTimeMillis());
 	
 	@Column(name="detalleQuejaxCliente",length=100,nullable=false)
 	private String detailComplainxCustomer;

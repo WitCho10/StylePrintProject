@@ -21,6 +21,7 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.service.ICustomerService;
+import pe.edu.upc.spring.service.IGarmentService;
 
 @Controller
 @RequestMapping("/customer")
@@ -28,6 +29,9 @@ public class CustomerController {
 	
 	@Autowired
 	private ICustomerService cService;
+	
+	@Autowired
+	private IGarmentService gService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida(Model model) {
@@ -39,7 +43,12 @@ public class CustomerController {
 		model.addAttribute("customer", new Customer());
 		return "Cliente/PerfilCliente";
 	}
-//	@PostMapping("/bienvenido")
+	@RequestMapping("/productos")
+	public String irListadoDeProductos(Map<String,Object> model) {
+		model.put("listaProductos", gService.listar());
+		return "Cliente/listProductos";
+	}
+	//	@PostMapping("/bienvenido")
 //	public String Login(@ModelAttribute("customer") Customer customer ) {
 //		Customer authCustomer = cService.login(customer.getEmailCustomer(),customer.getPasswordCustomer());
 //		System.out.print("authCustomer");

@@ -27,6 +27,9 @@ public class Garment implements Serializable  {
 	
 	@Column(name="nombreColor", length=60, nullable=false)
 	private String colornameGarment;
+
+	@Column(name="imagenPrenda",length=300, nullable=false)
+	 private String imageGarment;
 	
 	@ManyToOne
 	@JoinColumn(name="idGarmentType",nullable=false)
@@ -54,7 +57,7 @@ public class Garment implements Serializable  {
 	}
 
 	public Garment(int idGarment, String nameGarment, String colornameGarment, GarmentType garmenttype,
-			Supplier supplier, Size size, GarmentPosition garmentPosition, Administrator administrator) {
+			Supplier supplier, Size size, GarmentPosition garmentPosition, Administrator administrator, String imageGarment) {
 		super();
 		this.idGarment = idGarment;
 		this.nameGarment = nameGarment;
@@ -64,6 +67,7 @@ public class Garment implements Serializable  {
 		this.size = size;
 		this.garmentPosition = garmentPosition;
 		this.administrator = administrator;
+		this.imageGarment = imageGarment;
 	}
 
 	public int getIdGarment() {
@@ -88,6 +92,14 @@ public class Garment implements Serializable  {
 
 	public void setColornameGarment(String colornameGarment) {
 		this.colornameGarment = colornameGarment;
+	}
+
+	public String getImageGarment() {
+		return imageGarment;
+	}
+
+	public void setImageGarment(String imageGarment) {
+		this.imageGarment = imageGarment;
 	}
 
 	public GarmentType getGarmenttype() {
