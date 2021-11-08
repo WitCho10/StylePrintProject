@@ -54,7 +54,7 @@ public class ComplainxCustomerController {
 		model.addAttribute("complain", new Complain());
 		model.addAttribute("complainxcustomer", new ComplainxCustomer());
 		
-		model.addAttribute("listaClientes", cuService.listar());
+//		model.addAttribute("listaClientes", cuService.listar());
 		model.addAttribute("listaQuejas", coService.listar());		
 		
 		return "complainxcustomer";
