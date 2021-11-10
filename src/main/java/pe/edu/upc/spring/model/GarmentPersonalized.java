@@ -32,6 +32,10 @@ public class GarmentPersonalized implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name="idCustomer",nullable=false)
 	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name="idGarmentPosition",nullable=false)
+	private GarmentPosition garmentPosition;
 
 	public GarmentPersonalized() {
 		super();

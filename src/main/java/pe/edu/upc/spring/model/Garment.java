@@ -43,9 +43,9 @@ public class Garment implements Serializable  {
 	@JoinColumn(name="idSize",nullable=false)
 	private Size size;
 	
-	@ManyToOne
-	@JoinColumn(name="idGarmentPosition",nullable=false)
-	private GarmentPosition garmentPosition;
+//	@ManyToOne
+//	@JoinColumn(name="idGarmentPosition",nullable=false)
+//	private GarmentPosition garmentPosition;
 	
 	@ManyToOne
 	@JoinColumn(name="idAdministrator",nullable=false)
@@ -55,21 +55,18 @@ public class Garment implements Serializable  {
 		super();
 		
 	}
-
-	public Garment(int idGarment, String nameGarment, String colornameGarment, GarmentType garmenttype,
-			Supplier supplier, Size size, GarmentPosition garmentPosition, Administrator administrator, String imageGarment) {
+	public Garment(int idGarment, String nameGarment, String colornameGarment, String imageGarment,
+			GarmentType garmenttype, Supplier supplier, Size size, Administrator administrator) {
 		super();
 		this.idGarment = idGarment;
 		this.nameGarment = nameGarment;
 		this.colornameGarment = colornameGarment;
+		this.imageGarment = imageGarment;
 		this.garmenttype = garmenttype;
 		this.supplier = supplier;
 		this.size = size;
-		this.garmentPosition = garmentPosition;
 		this.administrator = administrator;
-		this.imageGarment = imageGarment;
 	}
-
 	public int getIdGarment() {
 		return idGarment;
 	}
@@ -126,14 +123,6 @@ public class Garment implements Serializable  {
 		this.size = size;
 	}
 
-	public GarmentPosition getGarmentPosition() {
-		return garmentPosition;
-	}
-
-	public void setGarmentPosition(GarmentPosition garmentPosition) {
-		this.garmentPosition = garmentPosition;
-	}
-
 	public Administrator getAdministrator() {
 		return administrator;
 	}
@@ -141,10 +130,6 @@ public class Garment implements Serializable  {
 	public void setAdministrator(Administrator administrator) {
 		this.administrator = administrator;
 	}
-
-	
-	
-
 	
 }
 

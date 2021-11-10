@@ -59,12 +59,12 @@ public class ComplainxCustomerServiceImpl implements IComplainxCustomerService{
 		
 	}
 	
-	@Override
-	@Transactional(readOnly=true)
-	public List<ComplainxCustomer> buscarAsunto(String affairComplainxCustomer) {
-		
-		return ccComplainxCustomer.buscarAsunto(affairComplainxCustomer);
-	}
+//	@Override
+//	@Transactional(readOnly=true)
+//	public List<ComplainxCustomer> buscarAsunto(String affairComplainxCustomer) {
+//		
+//		return ccComplainxCustomer.buscarAsunto(affairComplainxCustomer);
+//	}
 
 	@Override
 	@Transactional(readOnly=true)
