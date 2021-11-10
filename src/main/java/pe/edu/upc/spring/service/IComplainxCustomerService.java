@@ -13,7 +13,7 @@ public interface IComplainxCustomerService {
 	public Optional<ComplainxCustomer> listarId(int idComplainxCustomer);
 	public Optional<ComplainxCustomer> buscarId(int idComplainxCustomer);
 	List<ComplainxCustomer> listar();
-	List<ComplainxCustomer> buscarAsunto(String affairComplainxCustomer);
+	//List<ComplainxCustomer> buscarAsunto(String affairComplainxCustomer);
 	List<ComplainxCustomer> buscarCliente(String nameCustomer);
 	List<ComplainxCustomer> buscarQueja(String nameComplain);
 

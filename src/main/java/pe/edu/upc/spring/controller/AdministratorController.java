@@ -17,7 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Administrator;
+import pe.edu.upc.spring.model.Garment;
 import pe.edu.upc.spring.service.IAdministratorService;
+import pe.edu.upc.spring.service.IComplainxCustomerService;
+import pe.edu.upc.spring.service.IGarmentService;
 
 @Controller
 @RequestMapping("/administrator")
@@ -26,9 +29,20 @@ public class AdministratorController {
 	@Autowired
 	private IAdministratorService aService;
 	
+	@Autowired
+	private IGarmentService gService;
+	@Autowired
+	private IComplainxCustomerService cService;
+	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		//model.addAttribute("administrator", new Administrator());
+		return "Administrador/LoginAdmi";
+	}
+	@RequestMapping("/perfil")
+	public String irPerfil(Model model) {
+		model.addAttribute("administrator", new Administrator());
+		return "Administrador/PerfilAdmi";
 	}
 	
 	@RequestMapping("/")
@@ -39,8 +53,8 @@ public class AdministratorController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("administrator", new Administrator());
-		return "administrator";
+		model.addAttribute("prenda", new Garment());
+		return "Administrador/prenda";
 	}
 	
 	@RequestMapping("/registrar")
@@ -52,6 +66,21 @@ public class AdministratorController {
 			boolean flag = aService.Registrar(objAdministrator);
 			if(flag)
 				return "redirect:/administrator/listar";
+			else {
+				model.addAttribute("mensaje","Ocurrio un error");
+				return "redirect:/administrator/irRegistrar";				
+			}			
+		}		
+	}
+	@RequestMapping("/prenda")
+	public String registrarPrenda(@ModelAttribute Garment objPrenda, BindingResult binRes, Model model) throws ParseException
+	{
+		if(binRes.hasErrors())
+			return "Administrador/prenda";
+		else {
+			boolean flag = gService.Registrar(objPrenda);
+			if(flag)
+				return "redirect:/administrator/listPrenda";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
 				return "redirect:/administrator/irRegistrar";				
@@ -72,6 +101,28 @@ public class AdministratorController {
 			return "administrator";
 		}
 	}
+	@RequestMapping("/modificarPrenda/{id}")
+	public String modificarPrenda(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
+	{
+//		Optional<Administrator> objAdministrator = aService.listarId(id);
+		Optional<Garment> objGarment = gService.listarId(id);
+		if(objGarment== null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/administrator/listPrenda";
+		}
+		else {
+			model.addAttribute("garment", objGarment);
+			return "administrator/registrar";
+		}
+//		if(objAdministrator == null) {
+//			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+//			return "redirect:/administrator/listar";
+//		}
+//		else {
+//			model.addAttribute("administrator", objAdministrator);
+//			return "administrator";
+//		}
+	}
 	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
@@ -87,6 +138,16 @@ public class AdministratorController {
 			model.put("listaAdministradores", aService.listar());
 		}
 		return "listAdministrator";
+	}
+	@RequestMapping("/listPrenda")
+	public String listarPrendas(Map<String, Object> model) {
+		model.put("listaPrendas",gService.listar());
+		return "Administrador/listPrenda";
+	}
+	@RequestMapping("/listQueja")
+	public String listarQuejas(Map<String, Object> model) {
+		model.put("listaQuejasCliente",cService.listar());
+		return "Administrador/listQueja";
 	}
 	
 	@RequestMapping("/listar")

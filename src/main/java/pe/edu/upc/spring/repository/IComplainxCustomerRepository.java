@@ -13,8 +13,8 @@ import pe.edu.upc.spring.model.ComplainxCustomer;
 @Repository
 public interface IComplainxCustomerRepository extends JpaRepository<ComplainxCustomer, Integer>{
 	
-	@Query("from ComplainxCustomer p where p.affairComplainxCustomer like %:affairComplainxCustomer%")
-	List<ComplainxCustomer> buscarAsunto(@Param("affairComplainxCustomer") String affairComplainxCustomer);
+//	@Query("from ComplainxCustomer p where p.affairComplainxCustomer like %:affairComplainxCustomer%")
+//	List<ComplainxCustomer> buscarAsunto(@Param("affairComplainxCustomer") String affairComplainxCustomer);
 
 	@Query("from ComplainxCustomer d where d.customer.nameCustomer like %:nameCustomer%")
 	List<ComplainxCustomer> buscarCliente(@Param("nameCustomer") String nameCustomer);

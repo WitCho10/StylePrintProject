@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org" 
+lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+   
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->  
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/PerfilCliente.css}">
+     <link rel="stylesheet" th:href="@{/css/Sidebarstyle.css}">
+   <!--  <link rel="stylesheet" href="@{/css/Sidebarstyle.css}">-->
+    <!--  <link rel="stylesheet" th:href="@{/css/Sidebarstyle.css}">-->
+    <title>Document</title>
+</head>
+<body>
+  <div th:replace="fragments/headerCustomer :: headerCustomer"></div>
+  <div class="card text-white bg-dark col-sm-4 p-4 h-60 position-absolute top-80 start-50" style="width: 18rem;">
+      <img th:src="@{/imagenes/PoloNegro.jpg}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Alexander Talledo Carranza</h5>
+        <p class="card-text">Alexander_talledo1@hotmail.com</p>
+        <a href="/administrator/modificar" class="btn btn-primary">Editar perfil</a>
+      </div>
+   </div>
+  <div th:replace="fragments/sideBarAdmi :: sideBarAdmi">
+    
+  </div>
+
+  <!-- <nav class="navbar navbar-light bg-dark">
+    <div class="container">
+        <div class="navbar-brand">
+              <h2>Alexande talledo carranza</h2>
+        </div>
+    
+      <div class="navbar-brand input-group w-25 position-absolute top-5 start-50">              
+        <input type="text" class="form-control" placeholder="Buscar un producto" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2">Buscar</span>
+      </div>
+      <div class="col position-absolute top-5 end-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-patch-question-fill p-10" viewBox="0 0 16 16">
+            <path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627z"/>
+          </svg> 
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-bell-fill p-10" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house-door-fill p-10" viewBox="0 0 16 16">
+            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+          </svg>
+        
+      </div>
+      
+    </div>
+  </nav> -->
+      <!-- <div class="d-flex">
+        <div class="sidebar-container bg-primary">                  
+        <div class="menu">
+          <a href="./PerfilCliente.html"class="d-block text-light fw-bolder p-3 "><i class="bi bi-person-circle mr-2 lead p-2"></i>Mi perfil</a>
+          <a href="./MisCompras.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-bag-fill mr-2 lead p-2"></i>Mis compras</a>
+          <a href="./RealizarCompra.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Realizar compra</a>
+          <a href="./DiseñosDisponibles.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-brush-fill mr-2 lead p-2"></i>Diseños disponibles</a>
+          <a href="./RealizarQueja.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-exclamation-circle-fill mr-2 lead p-2"></i>Realizar queja</a>
+      </div>
+      </div>
+      <div class="card text-white bg-dark col-sm-4 p-4 h-60 position-absolute top-80 start-50" style="width: 18rem;">
+        <img src="./img/Logo.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Alexander Talledo Carranza</h5>
+          <p class="card-text">Alexander_talledo1@hotmail.com</p>
+          <a href="./EditarPerfil.html" class="btn btn-primary">Editar perfil</a>
+        </div>
+      </div>
+    </div> -->
+   
+</body>
+</html>

@@ -32,7 +32,8 @@ lang="en">
     </div>
   </nav> -->
   <div th:replace= "fragments/headerCustomer :: headerCustomer"></div>
-   <div class="card col-sm-6 p-3 h-25">
+  
+   <div class="card col-sm-4 p-4 h-75 position-absolute bottom-50 start-50">
       <form th:action="@{/customer/modificar/{id}}" method="post" th:object="${dueno}"> 
           <h2 class="textbox">Editar perfil de cliente</h2>
           <div class="mb-3">

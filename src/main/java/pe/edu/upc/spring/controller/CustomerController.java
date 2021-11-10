@@ -18,9 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-
+import pe.edu.upc.spring.model.Complain;
 import pe.edu.upc.spring.model.Customer;
+import pe.edu.upc.spring.model.Garment;
+import pe.edu.upc.spring.service.IComplainService;
 import pe.edu.upc.spring.service.ICustomerService;
+import pe.edu.upc.spring.service.IGarmentService;
 
 @Controller
 @RequestMapping("/customer")
@@ -28,6 +31,12 @@ public class CustomerController {
 	
 	@Autowired
 	private ICustomerService cService;
+	
+	@Autowired
+	private IComplainService coService;
+	
+	@Autowired
+	private IGarmentService gService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida(Model model) {
@@ -39,7 +48,12 @@ public class CustomerController {
 		model.addAttribute("customer", new Customer());
 		return "Cliente/PerfilCliente";
 	}
-//	@PostMapping("/bienvenido")
+	@RequestMapping("/productos")
+	public String irListadoDeProductos(Map<String,Object> model) {
+		model.put("listaProductos", gService.listar());
+		return "Cliente/listProductos";
+	}
+	//	@PostMapping("/bienvenido")
 //	public String Login(@ModelAttribute("customer") Customer customer ) {
 //		Customer authCustomer = cService.login(customer.getEmailCustomer(),customer.getPasswordCustomer());
 //		System.out.print("authCustomer");
@@ -51,18 +65,49 @@ public class CustomerController {
 //			
 //	}
 	@RequestMapping("/")
-	public String irPaginaListadoEstados(Map<String, Object> model) {
+	public String irPaginaListadoEstados(Map<String,Object> model) {
 		model.put("listaClientes",cService.listar());
 		return "listCustomer";
 	}
 	@RequestMapping("/nuevaCompra")
-	public String RealizarCompra(Model model){
-		model.addAttribute("customer", new Customer());
-		return "Cliente/RealizarCompra";		
+	public String RealizarCompra(Model model, RedirectAttributes objRedir,@ModelAttribute Garment objG) throws ParseException{
+		//Optional<Customer> objCustomer =
+		//model.addAttribute("customer", new Customer());
+		//model.addAttribute("garment", new Garment());
+		//Optional<Garment> objGarment= gService.listarId(id);
+//		if(objGarment ==null) {
+//			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+//			return "redirect:/petasd";
+//		}else {
+			//model.addAttribute("customer", new Customer());
+			model.addAttribute("garment", new Garment());
+			model.addAttribute("customer", new Customer());
+//			if(objGarment.isPresent())
+//				objGarment.ifPresent(o-> model.addAttribute("Garment",o));
+			return "Cliente/RealizarCompra";	
+			
+			
 	}
+	@RequestMapping("/modificar/{id}")
+	public String modificar(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
+	{
+		Optional<Customer> objCustomer = cService.listarId(id);
+		if(objCustomer == null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/customer/bienvenido";
+		}
+		else {
+			model.addAttribute("customer", objCustomer);
+			return "Cliente/EditarPerfil";
+		}
+	}
+	
 	@RequestMapping("/queja")
 	public String RealizarQueja(Model model) {
 		model.addAttribute("customer",new Customer());
+		model.addAttribute("Queja", new Complain());
+		
+		model.addAttribute("listaQuejas", coService.listar());
 		return "Cliente/RealizarQueja";
 	}
 	
@@ -89,19 +134,7 @@ public class CustomerController {
 		}		
 	}
 	
-	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
-	{
-		Optional<Customer> objCustomer = cService.listarId(id);
-		if(objCustomer == null) {
-			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/customer/bienvenido";
-		}
-		else {
-			model.addAttribute("customer", objCustomer);
-			return "Cliente/EditarPerfil";
-		}
-	}
+	
 	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {

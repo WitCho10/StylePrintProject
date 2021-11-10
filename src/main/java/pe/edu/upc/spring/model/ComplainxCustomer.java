@@ -28,12 +28,12 @@ public class ComplainxCustomer implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idComplainxCustomer;
 	
-	@Column(name="asuntoQuejaxCliente")
-	private String affairComplainxCustomer;
+//	@Column(name="asuntoQuejaxCliente")
+//	private String affairComplainxCustomer;
 	
 	@ManyToOne
 	@JoinColumn(name="idCustomer",nullable=false)
-	private Customer customer;
+	private Customer customer;	
 	
 	@ManyToOne
 	@JoinColumn(name="idComplain",nullable=false)
@@ -42,7 +42,7 @@ public class ComplainxCustomer implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name="fechaQueja")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date dateComplainxCustomer;
+	private Date dateComplainxCustomer = new Date(System.currentTimeMillis());
 	
 	@Column(name="detalleQuejaxCliente",length=100,nullable=false)
 	private String detailComplainxCustomer;
@@ -51,17 +51,18 @@ public class ComplainxCustomer implements Serializable{
 		super();
 		
 	}
+	
 
-	public ComplainxCustomer(int idComplainxCustomer, String affairComplainxCustomer, Customer customer,
-			Complain complain, Date dateComplainxCustomer, String detailComplainxCustomer) {
+	public ComplainxCustomer(int idComplainxCustomer, Customer customer, Complain complain, Date dateComplainxCustomer,
+			String detailComplainxCustomer) {
 		super();
 		this.idComplainxCustomer = idComplainxCustomer;
-		this.affairComplainxCustomer = affairComplainxCustomer;
 		this.customer = customer;
 		this.complain = complain;
 		this.dateComplainxCustomer = dateComplainxCustomer;
 		this.detailComplainxCustomer = detailComplainxCustomer;
 	}
+
 
 	public int getIdComplainxCustomer() {
 		return idComplainxCustomer;
@@ -69,14 +70,6 @@ public class ComplainxCustomer implements Serializable{
 
 	public void setIdComplainxCustomer(int idComplainxCustomer) {
 		this.idComplainxCustomer = idComplainxCustomer;
-	}
-
-	public String getAffairComplainxCustomer() {
-		return affairComplainxCustomer;
-	}
-
-	public void setAffairComplainxCustomer(String affairComplainxCustomer) {
-		this.affairComplainxCustomer = affairComplainxCustomer;
 	}
 
 	public Customer getCustomer() {
@@ -111,6 +104,7 @@ public class ComplainxCustomer implements Serializable{
 		this.detailComplainxCustomer = detailComplainxCustomer;
 	}
 
+	
 	
 	
 	

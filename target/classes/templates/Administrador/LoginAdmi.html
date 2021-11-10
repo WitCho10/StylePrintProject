@@ -27,39 +27,39 @@ lang="en">
             <div class="col">
                 <h2 class="fw-bold text-center pt-5 mb-5">Bienvenido</h2>
                 <div class="my-3 text-center pt-3">
-                        <span>Inicia sesion como administrador
-                            <a class="fw-bold" th:href="@{/administrator/bienvenido}">Regístrate</a>
+                        <span>Inicia sesión como cliente 
+                            <a class="fw-bold" th:href="@{/customer/bienvenido}">Iniciar sesión</a>
                             <br>
                         </span>
                        
                     </div>
                     <div class="my-3 text-center pt-3">
-                        <span>Inicia sesion como diseñador 
-                            <a class="fw-bold" href="/customer/irRegistrar">Regístrate</a>
+                        <span>Iniciar sesión como diseñador
+                            <a class="fw-bold" href="/customer/irRegistrar">Iniciar sesión</a>
                             <br>
                         </span>
                        
                     </div>
-                <form th:action="@{/bienvenido}" th:object="${customer}" method="post">
+                <form>
                     <div class="mb-4">
                         <label for="email" class="form-label">Email</label>           
                         <input class="form-control" type="email" 
                         id="formControlInput" placeholder="Ingresa tu email"
-                        th:field="*{emailCustomer}"
+                        
                         >  
                     </div>
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                         <input class="form-control" type="password"
                          id="formControlInput" placeholder="Ingresa tu contraseña"
-                         th:field="*{passwordCustomer}">  
+                         >  
                     </div>                   
                     <div class="mb-4 text-end">
                         <span><a class="text-center" href="#">¿Has olvidado tu contraseña?</a></span>
                     </div>
                     <div class="d-grid gap-2">
                         <!--  <button type="submit" class="d-grid btn btn-primary" id="formControlInput" >Iniciar Sesión</button>-->
-                    	<a class="fw-bold" href="/customer/perfil">Regístrate</a>
+                    	<a class="fw-bold" th:href="@{/administrator/perfil}">Regístrate</a>
                     </div>
                   
                     <div class="container w-100 my-5">
