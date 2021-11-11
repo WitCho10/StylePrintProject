@@ -32,19 +32,23 @@ public class Designer implements Serializable{
 	@Column(name="usernameDisenador", length=60, nullable=false)
 	private String usernameDesigner;
 	
-	@Column(name="correoDisenador", length=80, nullable=false)
+	@Column(name="correoDisenador", length=80, nullable=false, unique = true)
 	private String emialDesigner;
 	
-	@Column(name="contrasenaDiseñador", length=60, nullable=false)
+	@Column(name="contrasenaDiseñador", length=60, nullable=false, unique = true)
 	private String passworDesigner;
 
+	private Role rolDesig;
+	
 	public Designer() {
 		super();
 		
 	}
 
+	
+
 	public Designer(int idDesigner, String nameDesigner, String lastnameDesigner, int phoneDesigner,
-			String usernameDesigner, String emialDesigner, String passworDesigner) {
+			String usernameDesigner, String emialDesigner, String passworDesigner, Role rolDesig) {
 		super();
 		this.idDesigner = idDesigner;
 		this.nameDesigner = nameDesigner;
@@ -53,7 +57,10 @@ public class Designer implements Serializable{
 		this.usernameDesigner = usernameDesigner;
 		this.emialDesigner = emialDesigner;
 		this.passworDesigner = passworDesigner;
+		this.rolDesig = rolDesig;
 	}
+
+
 
 	public int getIdDesigner() {
 		return idDesigner;
@@ -109,6 +116,16 @@ public class Designer implements Serializable{
 
 	public void setPassworDesigner(String passworDesigner) {
 		this.passworDesigner = passworDesigner;
+	}
+
+
+	public Role getRolDesig() {
+		return rolDesig;
+	}
+
+
+	public void setRolDesig(Role rolDesig) {
+		this.rolDesig = rolDesig;
 	}
 	
 	
