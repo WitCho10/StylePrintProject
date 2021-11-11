@@ -19,11 +19,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Complain;
+import pe.edu.upc.spring.model.ComplainxCustomer;
 import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.model.Garment;
+import pe.edu.upc.spring.model.GarmentPosition;
 import pe.edu.upc.spring.service.IComplainService;
+import pe.edu.upc.spring.service.IComplainxCustomerService;
 import pe.edu.upc.spring.service.ICustomerService;
+import pe.edu.upc.spring.service.IGarmentPositionService;
 import pe.edu.upc.spring.service.IGarmentService;
+import pe.edu.upc.spring.service.ISizeService;
 
 @Controller
 @RequestMapping("/customer")
@@ -37,6 +42,15 @@ public class CustomerController {
 	
 	@Autowired
 	private IGarmentService gService;
+	
+	@Autowired
+	private ISizeService siService;
+	
+	@Autowired
+	private IComplainxCustomerService ccService;
+	
+	@Autowired
+	private IGarmentPositionService gpService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida(Model model) {
@@ -69,8 +83,8 @@ public class CustomerController {
 		model.put("listaClientes",cService.listar());
 		return "listCustomer";
 	}
-	@RequestMapping("/nuevaCompra")
-	public String RealizarCompra(Model model, RedirectAttributes objRedir,@ModelAttribute Garment objG) throws ParseException{
+	@RequestMapping("/nuevaCompra/{id}")
+	public String RealizarCompra(@PathVariable int id,Model model, RedirectAttributes objRedir,@ModelAttribute Garment objG) throws ParseException{
 		//Optional<Customer> objCustomer =
 		//model.addAttribute("customer", new Customer());
 		//model.addAttribute("garment", new Garment());
@@ -80,13 +94,25 @@ public class CustomerController {
 //			return "redirect:/petasd";
 //		}else {
 			//model.addAttribute("customer", new Customer());
-			model.addAttribute("garment", new Garment());
-			model.addAttribute("customer", new Customer());
+			Optional<Garment> objGarment = gService.listarId(id);
+			if(objGarment == null) {
+				objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+				return "redirect:/administrator/productos";
+			}
+			else {
+				
+				//model.addAttribute("garment", new Garment());
+				model.addAttribute("customer", new Customer());
+				model.addAttribute("listaPosiciones",gpService.listar());
+				model.addAttribute("listaTallas", siService.listar());
+				
+				if(objGarment.isPresent()) {
+					objGarment.ifPresent(o->model.addAttribute("prenda",o));					
+				}
+				return "Cliente/RealizarCompra";	
+			}
 //			if(objGarment.isPresent())
-//				objGarment.ifPresent(o-> model.addAttribute("Garment",o));
-			return "Cliente/RealizarCompra";	
-			
-			
+//				objGarment.ifPresent(o-> model.addAttribute("Garment",o));					
 	}
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
@@ -105,12 +131,32 @@ public class CustomerController {
 	@RequestMapping("/queja")
 	public String RealizarQueja(Model model) {
 		model.addAttribute("customer",new Customer());
-		model.addAttribute("Queja", new Complain());
-		
+		model.addAttribute("complain", new Complain());
+		model.addAttribute("Queja", new ComplainxCustomer());
 		model.addAttribute("listaQuejas", coService.listar());
+		model.addAttribute("listaClientes", cService.listar());
 		return "Cliente/RealizarQueja";
 	}
-	
+	@RequestMapping("/registrarQueja")
+	public String IngresarQueja(@ModelAttribute ComplainxCustomer objCC, BindingResult binRes,Model model) {
+		//model.addAttribute("Queja",new ComplainxCustomer());
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaQuejas", coService.listar());
+			model.addAttribute("listaClientes", cService.listar());
+			return "Administrador/queja";
+		}
+		//model.addAttribute("Queja", new Complain());
+		else {
+			boolean flag= ccService.Registrar(objCC);
+			if(flag)
+				return "redirect:/administrator/perfil";
+			else {
+				model.addAttribute("mensaje", "ocurrio un error");
+				return "redirect:/administrator/irRegistrar";
+			}
+			
+		}		
+	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
