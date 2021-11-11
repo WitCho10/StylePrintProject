@@ -60,7 +60,7 @@ lang="en">
 						<p th:text="${prod.colornameGarment}"class="card-text"></p>
 						</p>
 
-						<a th:href="@{/customer/nuevaCompra}" class="btn btn-primary">Comprar</a>
+						<a th:href="@{'/customer/nuevaCompra/'}+${prod.idGarment}" class="btn btn-primary">Comprar</a>
 					</div>
 					</div>
 				</div>

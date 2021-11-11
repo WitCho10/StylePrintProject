@@ -18,19 +18,29 @@ lang="en">
 </head>
 <body>
   <div th:replace="fragments/headerCustomer :: headerCustomer"></div>
-  <div class="card col-sm-6 p-3 h-25">
-  	<form method="post" th:object="${garment}">
+  <div class="card col-sm-6 p-3 h-75 position-absolute">
+  	<form method="post" th:object="${prenda}">
   	        <h2 class="textbox pt-2">Datos de su compra</h2>
          	 <div class="row">
            	 <div class="col pt-5">
             	    
             	</div>
             <div class="col">
-              <div class="mb-3 pt-5">
+            <div class="mb-3 pt-2">
+			 	<label for="id" class="form-label">IdPrenda</label>
+             	<input type="text" class="form-control" id="id" 
+             	 th:field="*{idGarment}" >             
+           
+			</div>
+              <div class="mb-3 pt-2">
                 <label for="exampleInputEmail1" class="form-label">Posicion de la prenda</label>
-                <select class="form-select" aria-label="Disabled select example">
-                    <option selected>Posicion de la prenda</option>
-                    <option value="1">One</option>
+                <select class="form-select"
+                 >               
+                    <option th:each="p: ${listaPosiciones}"
+                    	th:value="${p.idGarmentPosition}"
+                    	th:text="${p.nameGarmentPosition}">
+                    </option>
+                    
                     
                   </select>
               </div>
@@ -42,14 +52,17 @@ lang="en">
               <div class="mb-3 pt-2">
               <label for="exampleInputEmail1" class="form-label">Talla de la prenda</label>
                 <select class="form-select" aria-label="Disabled select example">
-                    <option selected>Talla de la prenda</option>
-                    <option value="1">One</option>
+                    <option th:each="a: ${listaTallas}"
+                    	th:value="${a.idSize}"
+                    	th:text="${a.nameSize}"
+                    ></option>
+                    
                     
                   </select>
                </div>
                <div class="mb-3 pt-2">
-					<label for="exampleInputEmail1" class="form-label">Cantidad</label>
-                		<select class="form-select" aria-label="Disabled select example">
+					<label for="cantidad" class="form-label">Cantidad</label>
+                		<select class="form-select">
                     		<option selected>Cantidad</option>
                    			<option value=1>1</option>
                    			<option value=2>2</option>
@@ -58,14 +71,14 @@ lang="en">
                    			<option value=5>5</option>
                    			<option value=6>6</option>
                    			<option value=7>7</option>                    
-                  </select>>
+                  </select>
               </div>
               <div class="mb-3 pt-2">
                 <label for="nombre" class="form-label">Total</label>
                 <textarea class="form-control" id="nombre" 
-                 th:field="*{nameGarment}"></textarea>
+                 ></textarea>
               </div>
-              <div class="mb-3 pt-4">
+              <div class="mb-3 pt-2">
                 	<button type="submit" class="btn btn-primary" position-relative>
                     Ingresar</span>
                	 	</button>
