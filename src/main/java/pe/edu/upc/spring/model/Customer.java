@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,19 +33,24 @@ public class Customer implements Serializable{
 	@Column(name="direccionCliente", length=60, nullable=false)
 	private String addressCustomer;
 	
-	@Column(name="correoCliente", length=60, nullable=false)
+	@Column(name="correoCliente", length=60, nullable=false, unique = true)
 	private String emailCustomer;
 	
-	@Column(name="contrasenaCliente", length=60, nullable=false)
+	@Column(name="contrasenaCliente", length=60, nullable=false, unique = true)
 	private String passwordCustomer;
 
+	@OneToOne
+	private Role rol;
+	
 	public Customer() {
 		super();
 		
 	}
 
+	
+
 	public Customer(int idCustomer, String nameCustomer, String lastnameCustomer, int phoneCustomer,
-			String addressCustomer, String emailCustomer, String passwordCustomer) {
+			String addressCustomer, String emailCustomer, String passwordCustomer, Role rol) {
 		super();
 		this.idCustomer = idCustomer;
 		this.nameCustomer = nameCustomer;
@@ -53,7 +59,10 @@ public class Customer implements Serializable{
 		this.addressCustomer = addressCustomer;
 		this.emailCustomer = emailCustomer;
 		this.passwordCustomer = passwordCustomer;
+		this.rol = rol;
 	}
+
+
 
 	public int getIdCustomer() {
 		return idCustomer;
@@ -110,7 +119,16 @@ public class Customer implements Serializable{
 	public void setPasswordCustomer(String passwordCustomer) {
 		this.passwordCustomer = passwordCustomer;
 	}
-	
-	
+
+
+	public Role getRol() {
+		return rol;
+	}
+
+
+	public void setRol(Role rol) {
+		this.rol = rol;
+	}
+		
 	
 }

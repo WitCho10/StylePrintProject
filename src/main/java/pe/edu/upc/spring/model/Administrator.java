@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,18 +33,24 @@ public class Administrator implements Serializable{
 	@Column(name="celularAdministrador",length=60,nullable=false)
 	private int phoneAdministrator;
 	
-	@Column(name="correoAdministrador",length=60,nullable=false)
+	@Column(name="correoAdministrador",length=60,nullable=false, unique = true)
 	private String emailAdministrator;
 	
-	@Column(name="contrasenaAdministrador",length=60,nullable=false)
+	@Column(name="contrasenaAdministrador",length=60,nullable=false, unique = true)
 	private String passwordAdministrator;
+	
+	@OneToOne
+	private Role rolAdmin;
 	
 	public Administrator() {
 		super();
 	}
 
+	
+
 	public Administrator(int idAdministrator, String nameAdministrator, String lastnameAdministrator,
-			int dniAdministrator, int phoneAdministrator, String emailAdministrator, String passwordAdministrator) {
+			int dniAdministrator, int phoneAdministrator, String emailAdministrator, String passwordAdministrator,
+			Role rolAdmin) {
 		super();
 		this.idAdministrator = idAdministrator;
 		this.nameAdministrator = nameAdministrator;
@@ -52,7 +59,10 @@ public class Administrator implements Serializable{
 		this.phoneAdministrator = phoneAdministrator;
 		this.emailAdministrator = emailAdministrator;
 		this.passwordAdministrator = passwordAdministrator;
+		this.rolAdmin = rolAdmin;
 	}
+
+
 
 	public int getIdAdministrator() {
 		return idAdministrator;
@@ -108,6 +118,18 @@ public class Administrator implements Serializable{
 
 	public void setPasswordAdministrator(String passwordAdministrator) {
 		this.passwordAdministrator = passwordAdministrator;
+	}
+
+
+
+	public Role getRolAdmin() {
+		return rolAdmin;
+	}
+
+
+
+	public void setRolAdmin(Role rolAdmin) {
+		this.rolAdmin = rolAdmin;
 	}
 
 	

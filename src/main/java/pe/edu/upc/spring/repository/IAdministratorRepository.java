@@ -15,4 +15,6 @@ public interface IAdministratorRepository extends JpaRepository<Administrator, I
 	@Query("from Administrator p where p.nameAdministrator like %:nameAdministrator%")
 	List<Administrator> buscarNombre(@Param("nameAdministrator") String nameAdministrator);
 	
+	public Administrator findByUsername(String username);
+	
 }
