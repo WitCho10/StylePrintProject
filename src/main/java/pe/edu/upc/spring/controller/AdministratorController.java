@@ -18,9 +18,16 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Administrator;
 import pe.edu.upc.spring.model.Garment;
+import pe.edu.upc.spring.model.GarmentType;
+import pe.edu.upc.spring.model.Size;
+import pe.edu.upc.spring.model.Supplier;
 import pe.edu.upc.spring.service.IAdministratorService;
 import pe.edu.upc.spring.service.IComplainxCustomerService;
 import pe.edu.upc.spring.service.IGarmentService;
+import pe.edu.upc.spring.service.IGarmentTypeService;
+import pe.edu.upc.spring.service.ISaleService;
+import pe.edu.upc.spring.service.ISizeService;
+import pe.edu.upc.spring.service.ISupplierService;
 
 @Controller
 @RequestMapping("/administrator")
@@ -33,6 +40,18 @@ public class AdministratorController {
 	private IGarmentService gService;
 	@Autowired
 	private IComplainxCustomerService cService;
+	
+	@Autowired
+	private ISaleService sService;
+	
+	@Autowired
+	private ISizeService siService;
+	
+	@Autowired
+	private IGarmentTypeService gtService;
+	
+	@Autowired
+	private ISupplierService suService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -54,6 +73,18 @@ public class AdministratorController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("prenda", new Garment());
+		model.addAttribute("tipo", new GarmentType());
+		model.addAttribute("proveedor", new Supplier());
+		model.addAttribute("tala", new Size());
+		
+		model.addAttribute("admi", new Administrator());
+		
+		
+		model.addAttribute("listaTallas",siService.listar());
+		model.addAttribute("listaProveedores",suService.listar());
+		model.addAttribute("listaTipos",gtService.listar());
+		model.addAttribute("listaAdmis",aService.listar());
+		
 		return "Administrador/prenda";
 	}
 	
@@ -61,7 +92,13 @@ public class AdministratorController {
 	public String registrar(@ModelAttribute Administrator objAdministrator, BindingResult binRes, Model model) throws ParseException
 	{
 		if(binRes.hasErrors())
-			return "administrator";
+		{
+			model.addAttribute("listaTallas",siService.listar());
+			model.addAttribute("listaProveedores",suService.listar());
+			model.addAttribute("listaTipos",gtService.listar());
+			model.addAttribute("listaAdmis",aService.listar());
+			return "Administrator/prenda";
+		}
 		else {
 			boolean flag = aService.Registrar(objAdministrator);
 			if(flag)
@@ -111,8 +148,15 @@ public class AdministratorController {
 			return "redirect:/administrator/listPrenda";
 		}
 		else {
-			model.addAttribute("garment", objGarment);
-			return "administrator/registrar";
+			//model.addAttribute("garment", objGarment);
+			model.addAttribute("listaTallas",siService.listar());
+			model.addAttribute("listaProveedores",suService.listar());
+			model.addAttribute("listaTipos",gtService.listar());
+			model.addAttribute("listaAdmis",aService.listar());
+			
+			if(objGarment.isPresent())
+				objGarment.ifPresent(o->model.addAttribute("prenda", o));
+			return "Administrador/prenda";
 		}
 //		if(objAdministrator == null) {
 //			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
@@ -122,6 +166,22 @@ public class AdministratorController {
 //			model.addAttribute("administrator", objAdministrator);
 //			return "administrator";
 //		}
+	}
+	@RequestMapping("/eliminarPrenda")
+	public String eliminarPrenda(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+		try {
+			if(id!=null && id>0) {
+				gService.eliminar(id);
+				//aService.eliminar(id);
+				model.put("listaPrendas", gService.listar());
+			}
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			model.put("mensaje", "Ocurrio un error");
+			model.put("listaPrendas", gService.listar());
+		}
+		return "Administrador/listPrenda";
 	}
 	
 	@RequestMapping("/eliminar")
@@ -149,7 +209,11 @@ public class AdministratorController {
 		model.put("listaQuejasCliente",cService.listar());
 		return "Administrador/listQueja";
 	}
-	
+	@RequestMapping("/listVentas")
+	public String listarVentas(Map<String, Object> model) {
+		model.put("listaVentas",cService.listar());
+		return "Administrador/listVentas";
+	}
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
 		model.put("listaAdministradores", aService.listar());
