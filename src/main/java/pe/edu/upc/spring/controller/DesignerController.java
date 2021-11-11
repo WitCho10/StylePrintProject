@@ -44,10 +44,22 @@ public class DesignerController {
 		return "listDesigner";
 	}
 	
+	@RequestMapping("/editarperfil")
+	public String irPaginaEditar(Model model) {
+		model.addAttribute("designer", new Designer());
+		return "EditarPerfilDiseñador";
+	}
+	
+	@RequestMapping("/mydesign")
+	public String irPaginaDesign(Model model) {
+		model.addAttribute("designer", new Designer());
+		return "Diseños";
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("designer", new Designer());
-		return "CuentaDiseñador";
+		return "Estampado";
 	}
 	
 	@RequestMapping("/registrar")

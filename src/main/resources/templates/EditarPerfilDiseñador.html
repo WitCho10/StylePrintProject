@@ -31,9 +31,9 @@
 <div class="d-flex">
     <div id="sidebar-container" class="bg-primary">
         <div class="menu">
-          <a th:href="MenuDiseñador.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
+          <a th:href="@{/designer/perfil}" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
           <a class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
-          <a class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Realizar Compra</a>
+          <a th:href="@{/designer/irRegistrar}" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Realizar Compra</a>
         </div>
     </div>
     <div class="container">
@@ -52,34 +52,34 @@
         </div>
     </div>
     <div class="card col-sm-6 p-3 h-25 centrar" style="margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: auto; height: 610px !important; ">
-      <form class="container">
+      <form class="container" th:action="@{designer/}">
           <center><h2 class="textbox">EDITAR PERFIL</h2></center>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nombres</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">
+              <input th:field="*{nameDesigner}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Apellidos</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tus apellidos">
+              <input th:field="*{lastnameDesigner}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tus apellidos">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Celular</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu número de celular">
+              <input th:field="*{phoneDesigner}" type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu número de celular">
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Apodo</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu apodo">
+              <input th:field="*{usernameDesigner}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu apodo">
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu correo">
+              <input th:field="*{emialDesigner}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu correo">
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Contraseña</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu contraseña">
+              <input th:field="*{passworDesigner}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu contraseña">
             </div>
             <div style="text-align: center;">
-              <button type="submit" class="btn1 btn-primary" position-relative>Guardar cambios</span></button>
+              <button th:field="*{nameDesigner}" type="submit" class="btn1 btn-primary" position-relative>Guardar cambios</span></button>
             </div>
       </form>
     </div>

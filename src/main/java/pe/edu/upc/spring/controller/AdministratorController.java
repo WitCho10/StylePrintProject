@@ -27,10 +27,6 @@ public class AdministratorController {
 	private IAdministratorService aService;
 	
 	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
-		return "InicioAdministrador";
-	}
-	
 	public String irPaginaBienvenida(Model model) {
 		model.addAttribute("administrator",new Administrator());
 		return "InicioAdministrador";

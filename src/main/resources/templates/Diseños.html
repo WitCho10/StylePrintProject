@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="static/css/style8.css" th:href="@{/css/style8.css}">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="static/css/styles.css" th:href="@{/css/styles.css}">
     <title>Document</title>
 </head>
-<body style="overflow: hidden;">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,34 +32,38 @@
         <div id="sidebar-container" class="bg-primary">
             <div class="menu">
                 <a th:href="@{/designer/perfil}" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
-                <a class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
+                <a th:href="@{/designer/mydesign}"class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
                 <a th:href="@{/designer/irRegistrar}" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Publicar diseño</a>
             </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-          <div class="col">
-            <br>
-            <br>
-            <br>
-            <br>
-          </div>
-          </div>
-        <div class="card" style="width: 400px; margin-left: auto; margin-right: auto; left: 0; right: 0;">
-          <div id="circulo"></div>
-          <div class="card-body">
-            <h5 class="card-title">USERNAME</h5>
-            <p class="card-text">CORREO</p>
-          </div>
-          <button type="button" class="btn1 btn-primary"><a th:href="@{/designer/editarperfil}">Editar Perfil</a></button>
-        </div>
       </div>
-      </div>
+      <form id="myform">
+    			<div class="row clearfix">
+    				<div class="col-md-12 column">
+    					    					    					
+    					<table class="table table-bordered table-hover table-striped" id="tab_logic">
+    						<thead>
+    							<tr>
+    								<th class="text-center">Nombre diseño</th>
+    								<th class="text-center">URL de la imagen</th>
+    								<th class="text-center">Detalle</th>
+    								<th class="text-center">Fecha de publicación</th>
+    							</tr>
+    						</thead>
+    						<tbody>
+    							<tr th:each="designer: ${listaDisenadores}">
+    								<td th:text="${designer.idDesigner}"></td>
+    								<td th:text="${designer.nameDesign}"></td>
+    								<td th:text="${designer.imgDesign}"></td>
+    								<td th:text="${designer.detailDesign}"></td>
+    								<td th:text="${#dates.format(designer.dateDesign, 'dd/MM/yyyy')}"></td>
+    								<td><a th:href="@{/designer/eliminar?id=}+${designer.idDesigner}">Eliminar</a></td> 
+    							</tr>
+    						</tbody>
+    					</table> 
+    					
+    				</div>
+    			</div>
+    		</form>
 </body>
 </html>

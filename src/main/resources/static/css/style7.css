@@ -9,7 +9,7 @@ body{
 	background-color: #1E2126 ;
     color: white;
 }
-/*Menù lateral*/
+/*Menu lateral*/
 .form-control
 {
     background-color: #1E2126;
@@ -21,6 +21,34 @@ body{
 }
 #buscar{
     width: 70%;
+}
+.btn1{
+   position:relative;
+   border-radius: 5px;
+   width:300px;
+   height: 35px;
+   margin-left: 10%;
+   margin-bottom: 10%;
+}
+.btn1 button{
+    background: #0D6EFD;
+    border-radius: 15px;
+    color: #FFFFFF;
+    border: none;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.btn1 a{
+    color: white;
+}
+.btn1 a:hover{
+    text-decoration: none;
+}
+.btn1 a:active{
+    color: white;
+}
+.btn1 button:hover{
+    background-color: #2669ce;
 }
 .cont-menu nav a{
     display: block;
@@ -42,7 +70,7 @@ body{
     cursor: pointer;
     font-size: 18px;
 }
-/*Fin de Menù lateral*/
+/*Fin de Menu lateral*/
 .nav-link{
     color: white;
 }

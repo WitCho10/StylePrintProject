@@ -50,7 +50,7 @@ public class DesignController {
 		
 		model.addAttribute("listaDisenadores", deService.listar());
 		
-		return "design";
+		return "Estampado";
 	}
 	
 	@RequestMapping("/registrar")
