@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,10 @@ import pe.edu.upc.spring.service.IAdministratorService;
 @Service
 public class AdministratorServiceImpl implements IAdministratorService{
 
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private IAdministratorRepository aAdministrator;
 	@Override
@@ -47,6 +52,12 @@ public class AdministratorServiceImpl implements IAdministratorService{
 	@Transactional(readOnly = true)
 	public List<Administrator> buscarNombre(String nameAdministrator) {
 		return aAdministrator.buscarNombre(nameAdministrator);
+	}
+
+	@Override
+	public Administrator RegistrarNuevo(Administrator administrator) {
+		administrator.setPasswordAdministrator(passwordEncoder.encode(administrator.getPasswordAdministrator()));
+		return aAdministrator.save(administrator);
 	}
 
 }

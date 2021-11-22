@@ -2,13 +2,14 @@ package pe.edu.upc.spring.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,6 @@ import pe.edu.upc.spring.model.Complain;
 import pe.edu.upc.spring.model.ComplainxCustomer;
 import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.model.Garment;
-import pe.edu.upc.spring.model.GarmentPosition;
 import pe.edu.upc.spring.service.IComplainService;
 import pe.edu.upc.spring.service.IComplainxCustomerService;
 import pe.edu.upc.spring.service.ICustomerService;
@@ -50,7 +50,37 @@ public class CustomerController {
 	private IComplainxCustomerService ccService;
 	
 	@Autowired
+	
 	private IGarmentPositionService gpService;
+	
+	
+	@Autowired
+	private ICustomerService customerService;
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("customer", new Customer());
+		return "login";
+	}
+	
+	@GetMapping("/registro")
+	public String registroForm(Model model) {
+		model.addAttribute("customer", new Customer());
+		return "registro";
+	}
+	@PostMapping("/registro")
+	public String registro(@Validated @ModelAttribute Customer customer,BindingResult result, Model model) {
+	if(result.hasErrors()) {
+		return "redirect:/registro";
+	}	
+	else {
+		model.addAttribute("customer", customerService.RegistrarNuevo(customer));
+		
+	}
+	return "Cliente/LoginCliente";
+	}
+
+	/////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida(Model model) {

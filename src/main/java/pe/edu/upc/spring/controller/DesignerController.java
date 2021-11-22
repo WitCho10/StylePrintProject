@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
-
 
 import pe.edu.upc.spring.model.Designer;
 import pe.edu.upc.spring.service.IDesignerService;
@@ -44,6 +46,36 @@ public class DesignerController {
 		return "designer";
 	}
 	
+	////
+	
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("designer", new Designer());
+		return "login";
+	}
+	
+	@GetMapping("/registro")
+	public String registroForm(Model model) {
+		model.addAttribute("designer", new Designer());
+		return "designer";
+	}
+	@PostMapping("/registro")
+	public String registro(@Validated @ModelAttribute Designer designer,BindingResult result, Model model) {
+	if(result.hasErrors()) {
+		return "redirect:/Designer";
+	}	
+	else {
+		model.addAttribute("designer", dService.RegistrarNuevo(designer));
+		
+	}
+	return "/LoginAdministrator";
+	}
+	
+	
+	
+	
+	///
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Designer objDesigner, BindingResult binRes, Model model) throws ParseException
 	{

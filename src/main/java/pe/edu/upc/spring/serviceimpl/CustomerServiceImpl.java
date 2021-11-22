@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 	@Override
 	@Transactional
-	public Customer Registrar(Customer customer) {
+	public Customer RegistrarNuevo(Customer customer) {
 	customer.setPasswordCustomer(passwordEncoder.encode(customer.getPasswordCustomer()));
 		return cCustomer.save(customer);
 	}

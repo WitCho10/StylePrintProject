@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import pe.edu.upc.spring.serviceimpl.JpaAdminDetailsService;
+import pe.edu.upc.spring.serviceimpl.JpaDesignDetailsService;
 //import pe.edu.upc.spring.auth.handler.LoginSuccessHandler;
 //import pe.edu.upc.spring.serviceimpl.JpaAdminDetailsService;
 //import pe.edu.upc.spring.serviceimpl.JpaDesignDetailsService;
@@ -21,11 +23,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
 	
-//	@Autowired
-//	private JpaAdminDetailsService adminDetailsService;
+	@Autowired
+	private JpaAdminDetailsService adminDetailsService;
 	
-//	@Autowired
-//	private JpaDesignDetailsService designDetailsService;
+	@Autowired
+	private JpaDesignDetailsService designDetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -61,14 +63,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			System.out.println(ex.getMessage());
 		}
 	}
-}
 
 		
-	
-	//public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
-	//	build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-	//	build.userDetailsService(adminDetailsService).passwordEncoder(passwordEncoder);
-	//	build.userDetailsService(designDetailsService).passwordEncoder(passwordEncoder);
-	//}
+	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
+		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		build.userDetailsService(adminDetailsService).passwordEncoder(passwordEncoder());
+		build.userDetailsService(designDetailsService).passwordEncoder(passwordEncoder());
+	}
+	}
 	
 	

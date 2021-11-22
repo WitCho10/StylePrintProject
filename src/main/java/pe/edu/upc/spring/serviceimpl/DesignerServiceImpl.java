@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,10 @@ import pe.edu.upc.spring.service.IDesignerService;
 @Service
 public class DesignerServiceImpl implements IDesignerService{
 
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private IDesignerRepository dDesigner;
 	
@@ -49,6 +54,13 @@ public class DesignerServiceImpl implements IDesignerService{
 	@Transactional(readOnly = true)
 	public List<Designer> buscarNombre(String nameDesigner) {
 		return dDesigner.buscarNombre(nameDesigner);
+	}
+
+	@Override
+	public Designer RegistrarNuevo(Designer designer) {
+		designer.setPassworDesigner(passwordEncoder.encode(designer.getPassworDesigner()));
+		return  dDesigner.save(designer);
+		
 	}
 	
 }

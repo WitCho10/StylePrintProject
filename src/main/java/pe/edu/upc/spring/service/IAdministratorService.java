@@ -8,6 +8,7 @@ import pe.edu.upc.spring.model.Administrator;
 
 public interface IAdministratorService {
 
+	public Administrator RegistrarNuevo(Administrator administrator);
 	public boolean Registrar(Administrator administrator);
 	public void eliminar (int idAdministrator);
 	public Optional<Administrator> listarId(int idAdministrator);

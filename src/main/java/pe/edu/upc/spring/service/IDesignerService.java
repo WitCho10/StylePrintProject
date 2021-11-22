@@ -8,6 +8,7 @@ import pe.edu.upc.spring.model.Designer;
 
 public interface IDesignerService {
 
+	public Designer RegistrarNuevo(Designer designer);
 	public boolean Registrar(Designer designer);
 	public void eliminar (int idDesigner);
 	public Optional<Designer> listarId(int idDesigner);

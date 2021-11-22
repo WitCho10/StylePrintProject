@@ -9,7 +9,7 @@ import pe.edu.upc.spring.model.Customer;
 public interface ICustomerService {
 	
 	public boolean registrar(Customer customer);
-	public Customer Registrar(Customer customer);
+	public Customer RegistrarNuevo(Customer customer);
 	public void eliminar (int idCustomer);
 	public Optional<Customer> listarId(int idCustomer);
 	List<Customer> listar();
