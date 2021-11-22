@@ -23,14 +23,14 @@ public class JpaDesignDetailsService implements UserDetailsService{
 	private IDesignerRepository designerRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String emialDesigner) throws UsernameNotFoundException {
 		
-		Designer designer = designerRepository.findByUsername(username);
+		Designer designer = designerRepository.findByEmialDesigner(emialDesigner);
 		UserBuilder builder = null;
 		
 		if(designer!=null)
 		{
-			builder=User.withUsername(username);
+			builder=User.withUsername(emialDesigner);
 			builder.disabled(false);
 			builder.password(designer.getPassworDesigner());
 			builder.authorities(new SimpleGrantedAuthority("ROLE_DESIGN"));

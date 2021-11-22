@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +19,18 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Autowired
 	private ICustomerRepository cCustomer;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	@Transactional
 	public boolean Registrar(Customer customer) {
+		
+		String pass= customer.getPasswordCustomer();
+		String passEcript = passwordEncoder.encode(pass);
+		
+		customer.setPasswordCustomer(passEcript);
+		//customer.setPasswordCustomer();;
 		Customer objCustomer = cCustomer.save(customer);
 		if(objCustomer==null)
 			return false;
