@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,28 +16,16 @@ import pe.edu.upc.spring.service.ICustomerService;
 @Service
 public class CustomerServiceImpl implements ICustomerService{
 
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private ICustomerRepository cCustomer;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+
 	
-	@Override
-	@Transactional
-	public boolean Registrar(Customer customer) {
-		
-		String pass= customer.getPasswordCustomer();
-		String passEcript = passwordEncoder.encode(pass);
-		
-		customer.setPasswordCustomer(passEcript);
-		//customer.setPasswordCustomer();;
-		Customer objCustomer = cCustomer.save(customer);
-		if(objCustomer==null)
-			return false;
-		else
-			return true;
-	}
-	
+
 //	@Override
 //	public Customer login(String username, String Password) {
 //		Customer user = cCustomer.findByUsernameAndPassword(username, Password);
@@ -65,6 +53,26 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Transactional(readOnly = true)
 	public List<Customer> buscarNombre(String nameCustomer) {
 		return cCustomer.buscarNombre(nameCustomer);
+	}
+	@Override
+	@Transactional
+	public Customer Registrar(Customer customer) {
+	customer.setPasswordCustomer(passwordEncoder.encode(customer.getPasswordCustomer()));
+		return cCustomer.save(customer);
+	}
+	@Override
+public boolean registrar(Customer customer) {
+		
+		String pass= customer.getPasswordCustomer();
+		String passEcript = passwordEncoder.encode(pass);
+		
+		customer.setPasswordCustomer(passEcript);
+		//customer.setPasswordCustomer();;
+		Customer objCustomer = cCustomer.save(customer);
+		if(objCustomer==null)
+			return false;
+		else
+			return true;
 	}
 	
 //	@Override

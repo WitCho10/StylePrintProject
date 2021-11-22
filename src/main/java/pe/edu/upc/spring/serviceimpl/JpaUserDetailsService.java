@@ -1,11 +1,8 @@
 package pe.edu.upc.spring.serviceimpl;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
@@ -15,49 +12,31 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.spring.model.Customer;
-import pe.edu.upc.spring.model.Role;
-import pe.edu.upc.spring.repository.ICustomerRepository;
+import pe.edu.upc.spring.model.Usuario;
+
+import pe.edu.upc.spring.repository.IUsuarioRepository;
 
 @Service
-public class JpaUserDetailsService implements UserDetailsService{
-
-	
+public class JpaUserDetailsService implements UserDetailsService {
 	@Autowired
-	private ICustomerRepository customerRepository;
-	
-	
-
+	private IUsuarioRepository usuarioRepository;
 	@Override
-	@Transactional(readOnly=true)
-	public UserDetails loadUserByUsername(String emailCustomer) throws UsernameNotFoundException {
+	@Transactional(readOnly = true)
+	public UserDetails loadUserByUsername(String useremail) throws UsernameNotFoundException {
+		Usuario  usuario = usuarioRepository.findByUsername(useremail);
+		UserBuilder builder =null;
 		
-		Customer customer = customerRepository.findByEmailCustomer(emailCustomer);
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		//UserBuilder builder = null;
-		for(Role role: customer.getRol()) {
-			authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+		if(usuario !=null){
+			builder=User.withUsername(useremail);
+			builder.disabled(false);
+			builder.password(usuario.getPassword());
+			builder.authorities(new SimpleGrantedAuthority("ROLE_CLIENT"));
 		}
-		return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),customer.getEnabled(),true,true,true,authorities);
-		//return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),authorities);
-		//return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),true,true,authorities);
-//		if(customer!=null)
-//		{
-//			builder=User.withUsername(emailCustomer);
-//			builder.disabled(false);
-//			builder.password(customer.getPasswordCustomer());
-//			builder.authorities(new SimpleGrantedAuthority("ROLE_CLIENT"));
-//			
-//		}else {
-//			throw new UsernameNotFoundException("Usuario no encontrado");
-//		}
-//		
-//		
-//		return builder.build();
-		
+		else {
+			throw new UsernameNotFoundException("Correo no encontrado");
+		}
+		return builder.build();
 	}
-
-	
-	
-	
 }
+		
+

@@ -164,21 +164,21 @@ public class CustomerController {
 		return "Cliente/CrearCuentaCliente";
 	}
 	
-	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Customer objCustomer, BindingResult binRes, Model model) throws ParseException
-	{
-		if(binRes.hasErrors())
-			return "customer";
-		else {
-			boolean flag = cService.Registrar(objCustomer);
-			if(flag)
-				return "redirect:/customer/bienvenido";
-			else {
-				model.addAttribute("mensaje","Ocurrio un error");
-				return "redirect:/customer/irRegistrar";				
-			}			
-		}		
-	}
+//	@RequestMapping("/registrar")
+//	public String registrar(@ModelAttribute Customer objCustomer, BindingResult binRes, Model model) throws ParseException
+//	{
+//		if(binRes.hasErrors())
+//			return "customer";
+//		else {
+	//		boolean flag = cService.Registrar(objCustomer);
+//			if(flag)
+//				return "redirect:/customer/bienvenido";
+//			else {
+//				model.addAttribute("mensaje","Ocurrio un error");
+//				return "redirect:/customer/irRegistrar";				
+//			}			
+//		}		
+//	}
 	
 	
 	

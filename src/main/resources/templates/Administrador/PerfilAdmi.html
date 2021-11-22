@@ -34,6 +34,9 @@ lang="en">
    </div>
   <div th:replace="fragments/sideBarAdmi :: sideBarAdmi">
     
+     <form method="POST" th:action="@(/logout)">
+     <a href="#" onclick="this.parentNode.submit();">Logout</a>
+     </form>
   </div>
 
   <!-- <nav class="navbar navbar-light bg-dark">
