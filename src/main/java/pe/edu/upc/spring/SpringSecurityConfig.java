@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pe.edu.upc.spring.auth.handler.LoginSuccessHandler;
@@ -14,7 +15,7 @@ import pe.edu.upc.spring.serviceimpl.JpaUserDetailsService;
 
 @EnableGlobalMethodSecurity(securedEnabled=true)
 @Configuration
-public class SpringSecurityConfig {
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
@@ -33,12 +34,16 @@ public class SpringSecurityConfig {
 	
 	protected void configure(HttpSecurity http) throws Exception{
 		try {
+			//.antMatchers("/administrator").access("hasRole('ROLE_ADMIN')")
+			//.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
+			//.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
 			http.authorizeRequests()
 			.antMatchers("/administrator").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
-			.antMatchers("/designer").access("hasRole('ROLE_DESIGN')").and()
-			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/welcome/bienvenido")
-			.permitAll().and().logout().logoutUrl("/logout").logoutSuccessUrl("");//aquí etiqueta para salir al menu principal
+			.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
+			.and()
+			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/customer/bienvenido")
+			.permitAll().and().logout().logoutSuccessUrl("/logout").permitAll();//aquí etiqueta para salir al menu principal
 			
 		}
 		catch(Exception ex){

@@ -40,26 +40,27 @@ lang="en">
                         </span>
                        
                     </div>
-                <form th:action="@{/bienvenido}" th:object="${customer}" method="post">
+                <form th:action="@{/login}" method="post">
                     <div class="mb-4">
                         <label for="email" class="form-label">Email</label>           
-                        <input class="form-control" type="email" 
-                        id="formControlInput" placeholder="Ingresa tu email"
-                        th:field="*{emailCustomer}"
+                        <input class="form-control" type="email" name="emailCustomer"
+                        
+                        id="emailCustomer" placeholder="Ingresa tu email"
+                       
                         >  
                     </div>
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                        <input class="form-control" type="password"
-                         id="formControlInput" placeholder="Ingresa tu contraseña"
-                         th:field="*{passwordCustomer}">  
+                        <input class="form-control" type="password" name="password"
+                         id="password" placeholder="Ingresa tu contraseña">  
                     </div>                   
                     <div class="mb-4 text-end">
                         <span><a class="text-center" href="#">¿Has olvidado tu contraseña?</a></span>
                     </div>
                     <div class="d-grid gap-2">
-                        <!--  <button type="submit" class="d-grid btn btn-primary" id="formControlInput" >Iniciar Sesión</button>-->
-                    	<a class="fw-bold" href="/customer/perfil">Regístrate</a>
+                          <button type="submit"
+                         class="d-grid btn btn-primary" id="formControlInput" >Iniciar Sesión</button>
+                    	<!--  <a class="fw-bold" href="/customer/perfil">Regístrate</a>-->
                     </div>
                   
                     <div class="container w-100 my-5">
@@ -115,8 +116,16 @@ lang="en">
                         </span>
                        
                     </div>
-
+					
                 </form>
+                <div align="center" class="col-sm-6">
+                	<div class="alert alert-success" th:if="${success != null}"
+					th:text="${success}"></div>
+					<div class="alert alert-danger" th:if="${error != null}"
+					th:text="${error}"></div>
+					<div class="alert alert-info" th:if="${info != null}"
+					th:text="${info}"></div>
+                </div>
             </div>
         </div>
 

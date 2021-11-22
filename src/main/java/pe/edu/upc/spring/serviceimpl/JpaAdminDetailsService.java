@@ -24,14 +24,14 @@ public class JpaAdminDetailsService implements UserDetailsService{
 	
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String emailAdministrator) throws UsernameNotFoundException {
 		
-		Administrator administrator = administratorRepository.findByUsername(username);
+		Administrator administrator = administratorRepository.findByEmailAdministrator(emailAdministrator);
 		UserBuilder builder = null;
 		
 		if(administrator!=null)
 		{
-			builder=User.withUsername(username);
+			builder=User.withUsername(emailAdministrator);
 			builder.disabled(false);
 			builder.password(administrator.getPasswordAdministrator());
 			builder.authorities(new SimpleGrantedAuthority("ROLE_ADMIN"));

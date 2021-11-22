@@ -1,12 +1,17 @@
 package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,19 +43,19 @@ public class Customer implements Serializable{
 	
 	@Column(name="contrasenaCliente", length=60, nullable=false, unique = true)
 	private String passwordCustomer;
-
-	@OneToOne
-	private Role rol;
+	@Column(name="enabled",length=30)
+	private Boolean enabled;
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name="customer_id")
+	private List<Role> rol;
 	
 	public Customer() {
 		super();
 		
 	}
 
-	
-
 	public Customer(int idCustomer, String nameCustomer, String lastnameCustomer, int phoneCustomer,
-			String addressCustomer, String emailCustomer, String passwordCustomer, Role rol) {
+			String addressCustomer, String emailCustomer, String passwordCustomer, Boolean enabled, List<Role> rol) {
 		super();
 		this.idCustomer = idCustomer;
 		this.nameCustomer = nameCustomer;
@@ -59,10 +64,9 @@ public class Customer implements Serializable{
 		this.addressCustomer = addressCustomer;
 		this.emailCustomer = emailCustomer;
 		this.passwordCustomer = passwordCustomer;
+		this.enabled = enabled;
 		this.rol = rol;
 	}
-
-
 
 	public int getIdCustomer() {
 		return idCustomer;
@@ -120,15 +124,27 @@ public class Customer implements Serializable{
 		this.passwordCustomer = passwordCustomer;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
 
-	public Role getRol() {
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Role> getRol() {
 		return rol;
 	}
 
-
-	public void setRol(Role rol) {
+	public void setRol(List<Role> rol) {
 		this.rol = rol;
 	}
+
+	
+
+	
+
+	
 		
 	
 }
