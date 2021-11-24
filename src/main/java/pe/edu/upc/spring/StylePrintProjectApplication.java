@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class StylePrintProjectApplication implements CommandLineRunner{
+public class StylePrintProjectApplication {
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
+		
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -21,18 +23,18 @@ public class StylePrintProjectApplication implements CommandLineRunner{
 		SpringApplication.run(StylePrintProjectApplication.class, args);
 	}
 	
-	@Override
-	public void run(String... args)throws Exception{
-		String password = "SECRETO";
-		String contra = "DIOSITO";
-		
-		for(int i=0; i<2; i++) {
-			String bcryptPassword = passwordEncoder.encode(password);
-			System.out.println(bcryptPassword);
-		}
-		for(int i=0; i<2; i++) {
-			String bcryptPassword2 = passwordEncoder.encode(contra);
-			System.out.println(bcryptPassword2);
-		}
-	}
+	
+//	@Override
+//	public void run(String... args) throws Exception {
+//
+//		String password = "web";
+//
+//		for (int i = 0; i < 1; i++) {
+//			String bcryptPassword = passwordEncoder.encode(password);
+//			System.out.println(bcryptPassword);
+//		}
+//	}
+//	
+	
+	
 }

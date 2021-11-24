@@ -9,34 +9,56 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pe.edu.upc.spring.auth.handler.LoginSuccessHandler;
+import pe.edu.upc.spring.serviceimpl.JpaAdminDetailsService;
+import pe.edu.upc.spring.serviceimpl.JpaDesignDetailsService;
 import pe.edu.upc.spring.serviceimpl.JpaUserDetailsService;
 
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled=true)
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
+	
+	@Autowired
+	private JpaAdminDetailsService adminDetailsService;
+	
+	@Autowired
+	private JpaDesignDetailsService designDetailsService;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private LoginSuccessHandler successHandler;
 	
 	protected void configure(HttpSecurity http) throws Exception{
 		try {
+			//.antMatchers("/administrator").access("hasRole('ROLE_ADMIN')")
+			//.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
+			//.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
 			http.authorizeRequests()
-			.antMatchers("/customer/**").access("hasRole('ROLE_USER')")
-			.antMatchers("/designer/**").access("hasRole('ROLE_DES') or hasRole('ROLE_ADMIN')")
-			.antMatchers("/administrator/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/administrator").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
+			.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
 			.and()
-			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/designer/perfil")
-			.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
+			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/customer/bienvenido")
+			.permitAll().and().logout().logoutSuccessUrl("/logout").permitAll();//aquí etiqueta para salir al menu principal
+			
 		}
-		catch(Exception ex) {
+		catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
+		
+		
+		
 	}
 	
-	public void configurerGlobal(AuthenticationManagerBuilder build)throws Exception{
+	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
 		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+		build.userDetailsService(adminDetailsService).passwordEncoder(passwordEncoder);
+		build.userDetailsService(designDetailsService).passwordEncoder(passwordEncoder);
 	}
+	
+	
 }

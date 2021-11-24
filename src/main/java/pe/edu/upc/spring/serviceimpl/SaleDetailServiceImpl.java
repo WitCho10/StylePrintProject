@@ -11,6 +11,7 @@ import pe.edu.upc.spring.model.SaleDetail;
 import pe.edu.upc.spring.repository.ISaleDetailRepository;
 import pe.edu.upc.spring.service.ISaleDetailService;
 
+
 @Service
 public class SaleDetailServiceImpl implements ISaleDetailService{
 

@@ -35,8 +35,8 @@ public class Sale implements Serializable{
 	@Column(name="precio")
 	private double totalSale;
 	
-	@Column(name="imgVenta")
-	private String imagenventaSale;
+//	@Column(name="imgVenta")
+//	private String imagenventaSale;
 	
 	@ManyToOne
 	@JoinColumn(name="idEstado")
@@ -55,14 +55,13 @@ public class Sale implements Serializable{
 		super();
 		
 	}
-
-	public Sale(int idSale, Date fechaemisionSale, double totalSale, String imagenventaSale, Status statusSale,
-			Date fechafinalSale, Customer customerSale) {
+	
+	public Sale(int idSale, Date fechaemisionSale, double totalSale, Status statusSale, Date fechafinalSale,
+			Customer customerSale) {
 		super();
 		this.idSale = idSale;
 		this.fechaemisionSale = fechaemisionSale;
 		this.totalSale = totalSale;
-		this.imagenventaSale = imagenventaSale;
 		this.statusSale = statusSale;
 		this.fechafinalSale = fechafinalSale;
 		this.customerSale = customerSale;
@@ -92,14 +91,6 @@ public class Sale implements Serializable{
 		this.totalSale = totalSale;
 	}
 
-	public String getImagenventaSale() {
-		return imagenventaSale;
-	}
-
-	public void setImagenventaSale(String imagenventaSale) {
-		this.imagenventaSale = imagenventaSale;
-	}
-
 	public Status getStatusSale() {
 		return statusSale;
 	}
@@ -123,6 +114,7 @@ public class Sale implements Serializable{
 	public void setCustomerSale(Customer customerSale) {
 		this.customerSale = customerSale;
 	}
+
 	
 	
 	

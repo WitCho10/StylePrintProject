@@ -10,21 +10,53 @@ xmlns:th="http://www.thymeleaf.org"
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css"> -->
-    <link rel="stylesheet" href="../../static/css/Sidebarstyle.css">
+    <!-- <link rel="stylesheet" href="@{/css/Sidebarstyle.css}">-->
+   
 </head>
 <body>
     <div th:fragment="sideBarCustomer">
-        <div class="d-flex">
-            <div class="sidebar-container bg-primary">                  
-                <div class="menu">          
-                    <a href="../Cliente/PerfilCliente.html"class="d-block text-light fw-bolder p-3 "><i class="bi bi-person-circle mr-2 lead p-2"></i>Mi perfil</a>          
-                    <a href="../Cliente/MisCompras.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-bag-fill mr-2 lead p-2"></i>Mis compras</a>         
-                    <a href="../Cliente/RealizarCompra.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Realizar compra</a>          
+        <div class="d-flex position-absolute">
+            <div class="sidebar-container bg-primary ">                  
+                <div class="menu">                                        
+                    <a href="/customer/perfil"class="d-block text-light fw-bolder p-3 "><i class="bi bi-person-circle mr-2 lead p-2"></i>Mi perfil</a>                    
+                    <a href="/customer/MisCompras"class="d-block text-light fw-bolder p-3"><i class="bi bi-bag-fill mr-2 lead p-2"></i>Mis compras</a>         
+                    <a href="/customer/productos"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Realizar compra</a> 
+                    <a href="/customer/DiseñosDisponibles"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Diseños disponibles</a> 
+                    <a href="/customer/queja"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Realizar queja</a> 
+                    
+                             
+                    <!--  <a href="../Cliente/RealizarCompra.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-cart-plus-fill mr-2 lead p-2"></i>Realizar compra</a>          
                     <a href="../Cliente/DiseñosDisponibles.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-brush-fill mr-2 lead p-2"></i>Diseños disponibles</a>
-                    <a href="../Cliente/RealizarQueja.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-exclamation-circle-fill mr-2 lead p-2"></i>Realizar queja</a>
+                    <a href="../Cliente/RealizarQueja.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-exclamation-circle-fill mr-2 lead p-2"></i>Realizar queja</a>-->
                  </div>
-          </div>     
-        </div>
+          </div>  
+	<!--  <div class="card col-sm-6 p-3 h-25">
+      <form>
+          <h2 class="textbox">Ingreso de datos de la queja</h2>
+       
+          <div class="mb-3 pt-4">
+            <label for="exampleInputEmail1" class="form-label">Tipo de su queja</label>
+            <select class="form-select" aria-label="Disabled select example">
+                <option selected>Seleccione su tipo de su queja</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+          </div>
+         
+          <div class="mb-3 pt-4">
+            <label for="exampleFormControlTextarea1" class="form-label">Detalle</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ingresa el detalle de su queja"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" position-relative>
+              Ingresar</span>
+          </button>
+                                  
+        </form>
+    </div>
+        </div>-->
+    </div>
     </div>
    
 </body>

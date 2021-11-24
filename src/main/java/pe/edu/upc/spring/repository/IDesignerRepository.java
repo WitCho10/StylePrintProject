@@ -16,4 +16,6 @@ public interface IDesignerRepository extends JpaRepository<Designer, Integer>{
 	@Query("from Designer d where d.nameDesigner like %:nameDesigner%")
 	List<Designer> buscarNombre(@Param("nameDesigner") String nameDesigner);
 
+	public Designer findByEmialDesigner(String emialDesigner);
+	
 }

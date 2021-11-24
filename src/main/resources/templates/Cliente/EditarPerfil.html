@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" 
+lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
    
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <link rel="stylesheet" href="../../static/css/ClienteCuentaStyle.css">
-    <link rel="stylesheet" href="../../static/css/Sidebarstyle.css">
+    <!--<link rel="stylesheet" href="../../static/css/ClienteCuentaStyle.css">-->
+    <link rel="stylesheet" th:href="@{/css/ClienteCuentaStyle.css}">
+    <!--<link rel="stylesheet" href="../../static/css/Sidebarstyle.css">-->
+    <link rel="stylesheet" th:href="@{/css/Sidebarstyle.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>Document</title>
@@ -27,6 +32,51 @@
     </div>
   </nav> -->
   <div th:replace= "fragments/headerCustomer :: headerCustomer"></div>
+  
+   <div class="card col-sm-4 p-4 h-75 position-absolute bottom-50 start-50">
+      <form th:action="@{/customer/modificar/{id}}" method="post" th:object="${dueno}"> 
+          <h2 class="textbox">Editar perfil de cliente</h2>
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">                
+          </div>
+          <div class="mb-3">
+              <label for="apellido" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellido" aria-describedby="emailHelp"placeholder="Ingresa tus apellidos">               
+          </div>
+          <div class="mb-3">
+              <label for="correo" class="form-label">Correo</label>
+              <input type="email" class="form-control" id="correo" aria-describedby="emailHelp"placeholder="Ingresa tu correo">        
+          </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+              <!-- <div id="emailHelp" class="form-text">No compartas tu contraseña con alguien más</div> -->
+            </div>
+            
+            <div class="mb-3">
+              <label for="celular" class="form-label">Celular</label>
+              <input type="text" class="form-control" id="celular" placeholder="Ingresa tu número de celular">
+              
+            </div>
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="direccion" placeholder="Ingresa tu dirección">
+              
+            </div>
+          <button type="submit" class="btn btn-primary" position-relative>
+              Actualizar datos</span>
+             <!--  <tbody>
+              <tr th:each="cust: ${}">
+              </tr>
+              </tbody>
+               -->
+          </button>
+                  <h6>¿Ya tienes cuenta?</h6>
+                  <!-- <h6 class="textIniciar">Inicia sesión</h6> -->
+                  <a class="textIniciar" href="">Iniciar sesión</a>                    
+        </form>
+    </div>
   <div th:replace= "fragments/sideBarCustomer :: sideBarCustomer"></div>
     <!-- <div class="d-flex">
         <div class="sidebar-container bg-primary">                  
@@ -38,47 +88,9 @@
             <a href="./RealizarQueja.html"class="d-block text-light fw-bolder p-3"><i class="bi bi-exclamation-circle-fill mr-2 lead p-2"></i>Realizar queja</a>
         </div>
       </div>     -->
-    <div class="card col-sm-6 p-3 h-25">
-      <form>
-          <h2 class="textbox">Editar perfil de cliente</h2>
-          <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Nombres</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">                
-          </div>
-          <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Apellidos</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tus apellidos">               
-          </div>
-          <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Ingresa tu correo">        
-          </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu contraseña">
-              <!-- <div id="emailHelp" class="form-text">No compartas tu contraseña con alguien más</div> -->
-            </div>
-            
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Celular</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu número de celular">
-              
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu dirección">
-              
-            </div>
-          <button type="submit" class="btn btn-primary" position-relative>
-              Regístrate ahora</span>
-          </button>
-                  <h6>¿Ya tienes cuenta?</h6>
-                  <!-- <h6 class="textIniciar">Inicia sesión</h6> -->
-                  <a class="textIniciar" href="">Iniciar sesión</a>                    
-        </form>
-    </div>
+  
     
-  </div>
+  
   
 </body>
 </html>

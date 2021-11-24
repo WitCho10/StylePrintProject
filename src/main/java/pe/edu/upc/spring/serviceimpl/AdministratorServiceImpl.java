@@ -15,7 +15,6 @@ public class AdministratorServiceImpl implements IAdministratorService{
 
 	@Autowired
 	private IAdministratorRepository aAdministrator;
-	
 	@Override
 	@Transactional
 	public boolean Registrar(Administrator administrator) {

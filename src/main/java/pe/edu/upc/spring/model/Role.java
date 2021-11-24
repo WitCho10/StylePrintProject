@@ -13,19 +13,19 @@ import javax.persistence.Table;
 public class Role implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idRole;
 	
 	private String authority;
 
-	public Long getId() {
-		return id;
+	public int getIdRole() {
+		return idRole;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
 	public String getAuthority() {
@@ -35,5 +35,6 @@ public class Role implements Serializable{
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-		
+	
+	
 }

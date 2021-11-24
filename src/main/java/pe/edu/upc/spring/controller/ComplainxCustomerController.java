@@ -54,7 +54,7 @@ public class ComplainxCustomerController {
 		model.addAttribute("complain", new Complain());
 		model.addAttribute("complainxcustomer", new ComplainxCustomer());
 		
-		model.addAttribute("listaClientes", cuService.listar());
+//		model.addAttribute("listaClientes", cuService.listar());
 		model.addAttribute("listaQuejas", coService.listar());		
 		
 		return "complainxcustomer";
@@ -141,30 +141,30 @@ public class ComplainxCustomerController {
 		return "buscar";
 	}	
 	
-	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute ComplainxCustomer complainxCustomer)
-			throws ParseException
-	{
-		List<ComplainxCustomer> listaQuejasxClientes;
-		complainxCustomer.setAffairComplainxCustomer(complainxCustomer.getAffairComplainxCustomer());
-		listaQuejasxClientes = ccService.buscarAsunto(complainxCustomer.getAffairComplainxCustomer());
-		
-		if(listaQuejasxClientes.isEmpty())
-		{
-			
-			listaQuejasxClientes=ccService.buscarCliente(complainxCustomer.getAffairComplainxCustomer());
-		}
-		if(listaQuejasxClientes.isEmpty())
-		{
-			listaQuejasxClientes=ccService.buscarQueja(complainxCustomer.getAffairComplainxCustomer());
-		}
-		if (listaQuejasxClientes.isEmpty()) {
-			model.put("mensaje", "No existen coincidencias");
-		}
-		
-		model.put("listaQuejasxClientes", listaQuejasxClientes);		
-		return "buscar";
-	}		
+//	@RequestMapping("/buscar")
+//	public String buscar(Map<String, Object> model, @ModelAttribute ComplainxCustomer complainxCustomer)
+//			throws ParseException
+//	{
+//		List<ComplainxCustomer> listaQuejasxClientes;
+//		complainxCustomer.setAffairComplainxCustomer(complainxCustomer.getAffairComplainxCustomer());
+//		listaQuejasxClientes = ccService.buscarAsunto(complainxCustomer.getAffairComplainxCustomer());
+//		
+//		if(listaQuejasxClientes.isEmpty())
+//		{
+//			
+//			listaQuejasxClientes=ccService.buscarCliente(complainxCustomer.getAffairComplainxCustomer());
+//		}
+//		if(listaQuejasxClientes.isEmpty())
+//		{
+//			listaQuejasxClientes=ccService.buscarQueja(complainxCustomer.getAffairComplainxCustomer());
+//		}
+//		if (listaQuejasxClientes.isEmpty()) {
+//			model.put("mensaje", "No existen coincidencias");
+//		}
+//		
+//		model.put("listaQuejasxClientes", listaQuejasxClientes);		
+//		return "buscar";
+//	}		
 	
 	
 }

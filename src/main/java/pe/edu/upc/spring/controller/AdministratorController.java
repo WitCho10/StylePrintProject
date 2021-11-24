@@ -17,7 +17,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Administrator;
+import pe.edu.upc.spring.model.Garment;
+import pe.edu.upc.spring.model.GarmentType;
+import pe.edu.upc.spring.model.Size;
+import pe.edu.upc.spring.model.Supplier;
 import pe.edu.upc.spring.service.IAdministratorService;
+import pe.edu.upc.spring.service.IComplainxCustomerService;
+import pe.edu.upc.spring.service.IGarmentService;
+import pe.edu.upc.spring.service.IGarmentTypeService;
+import pe.edu.upc.spring.service.ISaleService;
+import pe.edu.upc.spring.service.ISizeService;
+import pe.edu.upc.spring.service.ISupplierService;
 
 @Controller
 @RequestMapping("/administrator")
@@ -26,16 +36,32 @@ public class AdministratorController {
 	@Autowired
 	private IAdministratorService aService;
 	
-	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida(Model model) {
-		model.addAttribute("administrator",new Administrator());
-		return "InicioAdministrador";
-	}
+	@Autowired
+	private IGarmentService gService;
+	@Autowired
+	private IComplainxCustomerService cService;
 	
+	@Autowired
+	private ISaleService sService;
+	
+	@Autowired
+	private ISizeService siService;
+	
+	@Autowired
+	private IGarmentTypeService gtService;
+	
+	@Autowired
+	private ISupplierService suService;
+	
+	@RequestMapping("/bienvenido")
+	public String irPaginaBienvenida() {
+		//model.addAttribute("administrator", new Administrator());
+		return "Administrador/LoginAdmi";
+	}
 	@RequestMapping("/perfil")
-	public String irPaginaInicio(Model model) {
+	public String irPerfil(Model model) {
 		model.addAttribute("administrator", new Administrator());
-		return "MenuAdministrador";
+		return "Administrador/PerfilAdmi";
 	}
 	
 	@RequestMapping("/")
@@ -44,27 +70,54 @@ public class AdministratorController {
 		return "listAdministrator";
 	}
 	
-	@RequestMapping("/editarperfil")
-	public String irPaginaEditar(Model model) {
-		model.addAttribute("administrator", new Administrator());
-		return "EditarPerfilAdministrador";
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("administrator", new Administrator());
-		return "MenuAdministrador";
+		model.addAttribute("prenda", new Garment());
+		model.addAttribute("tipo", new GarmentType());
+		model.addAttribute("proveedor", new Supplier());
+		model.addAttribute("tala", new Size());
+		
+		model.addAttribute("admi", new Administrator());
+		
+		
+		model.addAttribute("listaTallas",siService.listar());
+		model.addAttribute("listaProveedores",suService.listar());
+		model.addAttribute("listaTipos",gtService.listar());
+		model.addAttribute("listaAdmis",aService.listar());
+		
+		return "Administrador/prenda";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Administrator objAdministrator, BindingResult binRes, Model model) throws ParseException
 	{
 		if(binRes.hasErrors())
-			return "MenuAdministrador";
+		{
+			model.addAttribute("listaTallas",siService.listar());
+			model.addAttribute("listaProveedores",suService.listar());
+			model.addAttribute("listaTipos",gtService.listar());
+			model.addAttribute("listaAdmis",aService.listar());
+			return "Administrator/prenda";
+		}
 		else {
 			boolean flag = aService.Registrar(objAdministrator);
 			if(flag)
 				return "redirect:/administrator/listar";
+			else {
+				model.addAttribute("mensaje","Ocurrio un error");
+				return "redirect:/administrator/irRegistrar";				
+			}			
+		}		
+	}
+	@RequestMapping("/prenda")
+	public String registrarPrenda(@ModelAttribute Garment objPrenda, BindingResult binRes, Model model) throws ParseException
+	{
+		if(binRes.hasErrors())
+			return "Administrador/prenda";
+		else {
+			boolean flag = gService.Registrar(objPrenda);
+			if(flag)
+				return "redirect:/administrator/listPrenda";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
 				return "redirect:/administrator/irRegistrar";				
@@ -85,6 +138,51 @@ public class AdministratorController {
 			return "administrator";
 		}
 	}
+	@RequestMapping("/modificarPrenda/{id}")
+	public String modificarPrenda(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
+	{
+//		Optional<Administrator> objAdministrator = aService.listarId(id);
+		Optional<Garment> objGarment = gService.listarId(id);
+		if(objGarment== null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/administrator/listPrenda";
+		}
+		else {
+			//model.addAttribute("garment", objGarment);
+			model.addAttribute("listaTallas",siService.listar());
+			model.addAttribute("listaProveedores",suService.listar());
+			model.addAttribute("listaTipos",gtService.listar());
+			model.addAttribute("listaAdmis",aService.listar());
+			
+			if(objGarment.isPresent())
+				objGarment.ifPresent(o->model.addAttribute("prenda", o));
+			return "Administrador/prenda";
+		}
+//		if(objAdministrator == null) {
+//			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+//			return "redirect:/administrator/listar";
+//		}
+//		else {
+//			model.addAttribute("administrator", objAdministrator);
+//			return "administrator";
+//		}
+	}
+	@RequestMapping("/eliminarPrenda")
+	public String eliminarPrenda(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+		try {
+			if(id!=null && id>0) {
+				gService.eliminar(id);
+				//aService.eliminar(id);
+				model.put("listaPrendas", gService.listar());
+			}
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			model.put("mensaje", "Ocurrio un error");
+			model.put("listaPrendas", gService.listar());
+		}
+		return "Administrador/listPrenda";
+	}
 	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
@@ -101,7 +199,21 @@ public class AdministratorController {
 		}
 		return "listAdministrator";
 	}
-	
+	@RequestMapping("/listPrenda")
+	public String listarPrendas(Map<String, Object> model) {
+		model.put("listaPrendas",gService.listar());
+		return "Administrador/listPrenda";
+	}
+	@RequestMapping("/listQueja")
+	public String listarQuejas(Map<String, Object> model) {
+		model.put("listaQuejasCliente",cService.listar());
+		return "Administrador/listQueja";
+	}
+	@RequestMapping("/listVentas")
+	public String listarVentas(Map<String, Object> model) {
+		model.put("listaVentas",cService.listar());
+		return "Administrador/listVentas";
+	}
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
 		model.put("listaAdministradores", aService.listar());
