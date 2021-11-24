@@ -17,7 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Designer;
+import pe.edu.upc.spring.model.Design;
 import pe.edu.upc.spring.service.IDesignerService;
+import pe.edu.upc.spring.service.IDesignService;
 
 @Controller
 @RequestMapping("/designer")
@@ -25,17 +27,19 @@ public class DesignerController {
 	
 	@Autowired
 	private IDesignerService dService;
+	@Autowired
+	private IDesignService deService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida(Model model) {
 		model.addAttribute("designer",new Designer());
-		return "InicioDiseÃ±ador";
+		return "InicioDiseñador";
 	}
 	
 	@RequestMapping("/perfil")
 	public String irPaginaInicio(Model model) {
 		model.addAttribute("designer", new Designer());
-		return "MenuDiseÃ±ador";
+		return "MenuDiseñador";
 	}
 	
 	@RequestMapping("/")
@@ -47,33 +51,43 @@ public class DesignerController {
 	@RequestMapping("/editarperfil")
 	public String irPaginaEditar(Model model) {
 		model.addAttribute("designer", new Designer());
-		return "EditarPerfilDiseÃ±ador";
+		return "Editar";
 	}
 	
-	@RequestMapping("/mydesign")
-	public String irPaginaDesign(Model model) {
-		model.addAttribute("designer", new Designer());
-		return "DiseÃ±os";
-	}
+	//@RequestMapping("/design")
+	//public String listaDesign(Model model) {
+	//	model.addAttribute("designer", new Designer());
+	//	model.addAttribute("design", new Designer());
+	//	model.addAttribute("listaEstampados", deService.listar());
+	//	model.addAttribute("listaDisenadores", dService.listar());
+	//	return "listadiseños";
+	//}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("designer", new Designer());
+		model.addAttribute("designer", new Design());
+		model.addAttribute("design", new Design());
+		model.addAttribute("listaEstampados", deService.listar());
+		model.addAttribute("listaDisenadores", dService.listar());
 		return "Estampado";
 	}
 	
-	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Designer objDesigner, BindingResult binRes, Model model) throws ParseException
+	@RequestMapping("/registrarEstampado")
+	public String registrar(@ModelAttribute("design") Design objDesign, BindingResult binRes, Model model) throws ParseException
 	{
-		if(binRes.hasErrors())
-			return "designer";
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaEstampados", deService.listar());
+			model.addAttribute("listaDisenadores", dService.listar());
+			return "Estampado";
+		}
+			
 		else {
-			boolean flag = dService.Registrar(objDesigner);
+			boolean flag = deService.Registrar(objDesign);
 			if(flag)
-				return "redirect:/designer/bienvenido";
+				return "redirect:/designer/irRegistrar";
 			else {
 				model.addAttribute("mensaje","Ocurrio un error");
-				return "redirect:/designer/bienvenido";				
+				return "redirect:/designer/irRegistar";				
 			}			
 		}		
 	}
@@ -87,32 +101,31 @@ public class DesignerController {
 			return "redirect:/designer/bienvenido";
 		}
 		else {
-			model.addAttribute("EditarPerfilDiseÃ±ador", objDesigner);
-			return "EditarPerfilDiseÃ±ador";
+			model.addAttribute("EditarPerfilDiseñador", objDesigner);
+			return "EditarPerfilDiseñador";
 		}
 	}
 	
-	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	@RequestMapping("/eliminarEstampado")
+	public String eliminarEstampado(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
 			if(id!=null && id>0) {
-				dService.eliminar(id);
-				model.put("listaDisenadores", dService.listar());
+				deService.eliminar(id);
+				model.put("listaEstampados", deService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
-			model.put("mensaje", "Ocurrio un roche");
-			model.put("listaDisenadores", dService.listar());
+			model.put("mensaje", "Ocurrio un error");
+			model.put("listaEstampados", deService.listar());
 		}
-		return "listDesigner";
+		return "listadiseños";
 	}
 	
-	@RequestMapping("/listar")
-	public String listar(Map<String, Object> model) {
-		model.put("listaDisenadores", dService.listar());
-		return "listDesigner";
-		
+	@RequestMapping("/listarEstampado")
+	public String listarEstampado(Map<String, Object> model) {
+		model.put("listaEstampados", deService.listar());
+		return "listadiseños";		
 	}
 	
 	@RequestMapping("/irBuscar")
