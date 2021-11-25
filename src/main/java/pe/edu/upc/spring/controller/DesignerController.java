@@ -54,15 +54,6 @@ public class DesignerController {
 		return "Editar";
 	}
 	
-	//@RequestMapping("/design")
-	//public String listaDesign(Model model) {
-	//	model.addAttribute("designer", new Designer());
-	//	model.addAttribute("design", new Designer());
-	//	model.addAttribute("listaEstampados", deService.listar());
-	//	model.addAttribute("listaDisenadores", dService.listar());
-	//	return "listadiseños";
-	//}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("designer", new Design());
@@ -92,17 +83,17 @@ public class DesignerController {
 		}		
 	}
 	
-	@RequestMapping("/modificar/{id}")
+	@RequestMapping("/modificarEstampado/{id}")
 	public String modificar(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
 	{
-		Optional<Designer> objDesigner = dService.listarId(id);
-		if(objDesigner == null) {
+		Optional<Design> objDesign = deService.listarId(id);
+		if(objDesign == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/designer/bienvenido";
+			return "redirect:/designer/listarEstampado";
 		}
 		else {
-			model.addAttribute("EditarPerfilDiseñador", objDesigner);
-			return "EditarPerfilDiseñador";
+			model.addAttribute("design", objDesign.get());
+			return "Estampado";
 		}
 	}
 	
