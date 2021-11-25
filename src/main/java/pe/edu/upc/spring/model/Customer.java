@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Cliente")
 public class Customer implements Serializable{
-
 	
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +31,8 @@ public class Customer implements Serializable{
 	@Column(name="apellidoCliente", length=60, nullable=false)
 	private String lastnameCustomer;
 	
+	
+	
 	@Column(name="celularCliente", length=60, nullable=false)
 	private int phoneCustomer;
 	
@@ -43,17 +44,24 @@ public class Customer implements Serializable{
 	
 	@Column(name="contrasenaCliente", length=60, nullable=false, unique = true)
 	private String passwordCustomer;
+	
 	@Column(name="enabled",length=30)
 	private Boolean enabled;
+	
+	
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="customer_id")
 	private List<Role> rol;
+	
+	
 	
 	public Customer() {
 		super();
 		
 	}
 
+	
+	
 	public Customer(int idCustomer, String nameCustomer, String lastnameCustomer, int phoneCustomer,
 			String addressCustomer, String emailCustomer, String passwordCustomer, Boolean enabled, List<Role> rol) {
 		super();
