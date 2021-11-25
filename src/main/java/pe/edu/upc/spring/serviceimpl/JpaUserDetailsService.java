@@ -24,35 +24,34 @@ public class JpaUserDetailsService implements UserDetailsService{
 
 	
 	@Autowired
-	private ICustomerRepository customerRepository;
-	
-	
-
+	private ICustomerRepository customerRepository;	
 	@Override
 	@Transactional(readOnly=true)
-	public UserDetails loadUserByUsername(String emailCustomer) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Customer customer = customerRepository.findByEmailCustomer(emailCustomer);
+		Customer customer = customerRepository.findByUsername(username);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		//UserBuilder builder = null;
 		for(Role role: customer.getRol()) {
 			authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
 		}
-		return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),customer.getEnabled(),true,true,true,authorities);
+		return new User(customer.getUsername(),customer.getPassword(),customer.getEnabled(),true,true,true,authorities);
 		//return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),authorities);
-		//return new User(customer.getEmailCustomer(),customer.getPasswordCustomer(),true,true,authorities);
+		//return new User(customer.getUsername(),customer.getPassword(),customer.getEnabled(),true,true,authorities);
 //		if(customer!=null)
 //		{
-//			builder=User.withUsername(emailCustomer);
+//			builder=User.withUsername(username);
 //			builder.disabled(false);
-//			builder.password(customer.getPasswordCustomer());
+//			builder.password(customer.getPassword());
 //			builder.authorities(new SimpleGrantedAuthority("ROLE_CLIENT"));
 //			
-//		}else {
-//			throw new UsernameNotFoundException("Usuario no encontrado");
 //		}
-//		
-//		
+//		else {
+//			throw new UsernameNotFoundException("no existe");
+//		}
+//	
+		
+		
 //		return builder.build();
 		
 	}

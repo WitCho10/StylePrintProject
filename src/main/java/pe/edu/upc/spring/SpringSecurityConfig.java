@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pe.edu.upc.spring.auth.handler.LoginSuccessHandler;
-import pe.edu.upc.spring.serviceimpl.JpaAdminDetailsService;
-import pe.edu.upc.spring.serviceimpl.JpaDesignDetailsService;
+//import pe.edu.upc.spring.serviceimpl.JpaAdminDetailsService;
+//import pe.edu.upc.spring.serviceimpl.JpaDesignDetailsService;
 import pe.edu.upc.spring.serviceimpl.JpaUserDetailsService;
 
 @EnableGlobalMethodSecurity(securedEnabled=true)
@@ -20,11 +20,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
 	
-	@Autowired
-	private JpaAdminDetailsService adminDetailsService;
+//	@Autowired
+//	private JpaAdminDetailsService adminDetailsService;
 	
-	@Autowired
-	private JpaDesignDetailsService designDetailsService;
+//	@Autowired
+//	private JpaDesignDetailsService designDetailsService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -38,12 +38,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			//.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
 			//.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
 			http.authorizeRequests()
-			.antMatchers("/administrator").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/customer").access("hasRole('ROLE_CLIENT')")
-			.antMatchers("/designer").access("hasRole('ROLE_DESIGN')")
+			.antMatchers("/administrator/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/customer/**").access("hasRole('ROLE_CLIENT')")
+			.antMatchers("/menu/**").access("hasRole('ROLE_CLIENT')")
+			.antMatchers("/designer/**").access("hasRole('ROLE_DESIGN')")
+//			.antMatchers("/welcome/**").access("hasRole('ROLE_CLIENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DESIGN')")
 			.and()
-			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/customer/bienvenido")
-			.permitAll().and().logout().logoutSuccessUrl("/logout").permitAll();//aquí etiqueta para salir al menu principal
+			.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/customer/perfil")
+			.permitAll().and().logout().logoutSuccessUrl("/login").permitAll();
 			
 		}
 		catch(Exception ex){
@@ -56,8 +58,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
 		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-		build.userDetailsService(adminDetailsService).passwordEncoder(passwordEncoder);
-		build.userDetailsService(designDetailsService).passwordEncoder(passwordEncoder);
+		//build.userDetailsService(adminDetailsService).passwordEncoder(passwordEncoder);
+		//build.userDetailsService(designDetailsService).passwordEncoder(passwordEncoder);
 	}
 	
 	

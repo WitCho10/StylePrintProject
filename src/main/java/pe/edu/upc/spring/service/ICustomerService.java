@@ -13,6 +13,8 @@ public interface ICustomerService {
 	public Optional<Customer> listarId(int idCustomer);
 	List<Customer> listar();
 	List<Customer> buscarNombre(String nameCustomer);
+	public Customer findByUsername(String username);
+	public Customer login(Customer bean);
 	//public Customer login(String emailCustomer, String passwordCustomer);
 	
 }

@@ -19,6 +19,8 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer>{
 //	@Query("from Customer d where d.emailCustomer=? and d.passwordCustomer=?")
 //	Customer buscarPorUsernameYPassword(String emailCustomer, String passwordCustomer);
 
-	public Customer findByEmailCustomer(String emailCustomer);
+	public Customer findByUsername(String username);
 	
+	@Query("select c from Customer c where c.username = :#{#usu.username} and c.password= :#{#usu.password}")    
+	public Customer login(@Param(value="usu")Customer bean);
 }

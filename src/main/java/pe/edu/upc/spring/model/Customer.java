@@ -38,13 +38,15 @@ public class Customer implements Serializable{
 	@Column(name="direccionCliente", length=60, nullable=false)
 	private String addressCustomer;
 	
-	@Column(name="correoCliente", length=60, nullable=false, unique = true)
-	private String emailCustomer;
+	@Column(length=60, nullable=false, unique = true)
+	private String username;
 	
-	@Column(name="contrasenaCliente", length=60, nullable=false, unique = true)
-	private String passwordCustomer;
-	@Column(name="enabled",length=30)
+	@Column( length=60, nullable=false, unique = true)
+	private String password;
+	
 	private Boolean enabled;
+	
+	
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="customer_id")
 	private List<Role> rol;
@@ -53,17 +55,17 @@ public class Customer implements Serializable{
 		super();
 		
 	}
-
+	
 	public Customer(int idCustomer, String nameCustomer, String lastnameCustomer, int phoneCustomer,
-			String addressCustomer, String emailCustomer, String passwordCustomer, Boolean enabled, List<Role> rol) {
+			String addressCustomer, String username, String password, Boolean enabled, List<Role> rol) {
 		super();
 		this.idCustomer = idCustomer;
 		this.nameCustomer = nameCustomer;
 		this.lastnameCustomer = lastnameCustomer;
 		this.phoneCustomer = phoneCustomer;
 		this.addressCustomer = addressCustomer;
-		this.emailCustomer = emailCustomer;
-		this.passwordCustomer = passwordCustomer;
+		this.username = username;
+		this.password = password;
 		this.enabled = enabled;
 		this.rol = rol;
 	}
@@ -108,20 +110,20 @@ public class Customer implements Serializable{
 		this.addressCustomer = addressCustomer;
 	}
 
-	public String getEmailCustomer() {
-		return emailCustomer;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmailCustomer(String emailCustomer) {
-		this.emailCustomer = emailCustomer;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getPasswordCustomer() {
-		return passwordCustomer;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordCustomer(String passwordCustomer) {
-		this.passwordCustomer = passwordCustomer;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Boolean getEnabled() {
@@ -139,6 +141,8 @@ public class Customer implements Serializable{
 	public void setRol(List<Role> rol) {
 		this.rol = rol;
 	}
+
+	
 
 	
 

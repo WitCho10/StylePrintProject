@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+
 lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +14,10 @@ lang="en">
     <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <!--  <link rel="stylesheet" href="../../static/css/LoginClienteStyle.css">-->
    <link th:href="@{/css/LoginClienteStyle.css}" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript"
+				src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+    
     
     <title>StylePrint</title>
 </head>
@@ -40,29 +45,31 @@ lang="en">
                         </span>
                        
                     </div>
-                <form th:action="@{/login}" method="post">
-                    <div class="mb-4">
-                        <label for="email" class="form-label">Email</label>           
-                        <input class="form-control" type="email" name="emailCustomer"
+                <form th:action="@{/login}" method="post" class="Login-form">
+                    <div class="form-group mb-4">
+                        <label for="form-username" class="form-label">Email</label>           
+                        <input class="form-control" type="text" name="username"
                         
-                        id="emailCustomer" placeholder="Ingresa tu email"
+                        id="username" placeholder="Ingresa tu email"
                        
                         >  
                     </div>
-                    <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <div class="form-group mb-4">
+                        <label for="form-password" class="form-label">Contraseña</label>
                         <input class="form-control" type="password" name="password"
                          id="password" placeholder="Ingresa tu contraseña">  
-                    </div>                   
+                    </div>  
+                     <div class="form-group d-grid gap-2">
+                          <input type="submit"
+                         class="d-grid btn btn-primary" id="formControlInput"
+                         value ="Sign In" name="submit" ></input>
+                    	<!--  <a class="fw-bold" href="/customer/perfil">Regístrate</a>-->
+                    </div>
+                  </form>                 
                     <div class="mb-4 text-end">
                         <span><a class="text-center" href="#">¿Has olvidado tu contraseña?</a></span>
                     </div>
-                    <div class="d-grid gap-2">
-                          <button type="submit"
-                         class="d-grid btn btn-primary" id="formControlInput" >Iniciar Sesión</button>
-                    	<!--  <a class="fw-bold" href="/customer/perfil">Regístrate</a>-->
-                    </div>
-                  
+                   
                     <div class="container w-100 my-5">
                         <div class="row text-center">
                             <span>O iniciar sesión con</span>
@@ -117,7 +124,7 @@ lang="en">
                        
                     </div>
 					
-                </form>
+                
                 <div align="center" class="col-sm-6">
                 	<div class="alert alert-success" th:if="${success != null}"
 					th:text="${success}"></div>

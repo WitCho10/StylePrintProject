@@ -26,12 +26,15 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Transactional
 	public boolean Registrar(Customer customer) {
 		
-		String pass= customer.getPasswordCustomer();
-		String passEcript = passwordEncoder.encode(pass);
+//		String pass= customer.getPasswordCustomer();
+//		String passEcript = passwordEncoder.encode(pass);
+		Customer objCustomer = new Customer();
+//		
+		String passEncript =passwordEncoder.encode(customer.getPassword());		
 		
-		customer.setPasswordCustomer(passEcript);
-		//customer.setPasswordCustomer();;
-		Customer objCustomer = cCustomer.save(customer);
+		objCustomer.setPassword(passEncript);
+		objCustomer = cCustomer.save(customer);
+		//Customer objCustomer = cCustomer.save(customer);
 		if(objCustomer==null)
 			return false;
 		else
@@ -66,7 +69,16 @@ public class CustomerServiceImpl implements ICustomerService{
 	public List<Customer> buscarNombre(String nameCustomer) {
 		return cCustomer.buscarNombre(nameCustomer);
 	}
-	
+	@Override
+	@Transactional(readOnly=true)
+	public Customer findByUsername(String username) {
+		return cCustomer.findByUsername(username);
+	}
+	@Override
+	@Transactional(readOnly=true)
+	public Customer login(Customer bean) {
+		return cCustomer.login(bean);
+	}
 //	@Override
 //	@Transactional(readOnly = true)
 //	public Customer login(String emailCustomer, String passwordCustomer){
