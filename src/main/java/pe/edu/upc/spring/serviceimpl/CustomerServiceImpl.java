@@ -38,11 +38,7 @@ public class CustomerServiceImpl implements ICustomerService{
 			return true;
 	}
 	
-//	@Override
-//	public Customer login(String username, String Password) {
-//		Customer user = cCustomer.findByUsernameAndPassword(username, Password);
-//		return user;
-//	}
+
 	
 	@Override
 	@Transactional
