@@ -41,8 +41,7 @@ public class AdministratorController {
 	@Autowired
 	private IComplainxCustomerService cService;
 	
-	@Autowired
-	private ISaleService sService;
+	
 	
 	@Autowired
 	private ISizeService siService;
@@ -141,14 +140,14 @@ public class AdministratorController {
 	@RequestMapping("/modificarPrenda/{id}")
 	public String modificarPrenda(@PathVariable int id, Model model , RedirectAttributes objRedir) throws ParseException
 	{
-//		Optional<Administrator> objAdministrator = aService.listarId(id);
+
 		Optional<Garment> objGarment = gService.listarId(id);
 		if(objGarment== null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 			return "redirect:/administrator/listPrenda";
 		}
 		else {
-			//model.addAttribute("garment", objGarment);
+		
 			model.addAttribute("listaTallas",siService.listar());
 			model.addAttribute("listaProveedores",suService.listar());
 			model.addAttribute("listaTipos",gtService.listar());
@@ -158,14 +157,7 @@ public class AdministratorController {
 				objGarment.ifPresent(o->model.addAttribute("prenda", o));
 			return "Administrador/prenda";
 		}
-//		if(objAdministrator == null) {
-//			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-//			return "redirect:/administrator/listar";
-//		}
-//		else {
-//			model.addAttribute("administrator", objAdministrator);
-//			return "administrator";
-//		}
+
 	}
 	@RequestMapping("/eliminarPrenda")
 	public String eliminarPrenda(Map<String, Object> model, @RequestParam(value="id") Integer id) {
