@@ -38,7 +38,7 @@ public class ComplainxCustomerController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "MenuCliente";
 	}
 		
 	@RequestMapping("/")

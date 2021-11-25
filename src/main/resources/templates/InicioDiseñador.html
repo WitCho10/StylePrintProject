@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style3.css">
+    <link rel="stylesheet" href="../static/css/style3.css" th:href="@{/css/style3.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -31,21 +31,21 @@
                 <p1>¿Has olvidado tu contraseña?</p1>
             </div>
             <div class="btn">
-                <button type="submit" ><a href="MenuDiseñador.html">Iniciar sesión</a></button>
+                <button type="submit"><a th:href="@{/designer/perfil}">Iniciar sesión</a></button>
             </div>
             <div class="signup-link">
-                ¿Todavía no tienes cuenta? <a href="CuentaDiseñador.html">Crea una ahora</a>
+                ¿Todavía no tienes cuenta? <a th:href="@{/designer/irRegistrar}">Crea una ahora</a>
             </div>
         </form>
     </div>
     <!--contenido derecho-->
     <div id="cont-der">
-        <img src="static/imagenes/logo.jpg" alt="logo">
+        <img src="../static/imagenes/logo.jpg" th:src="@{/imagenes/logo.jpg}" alt="logo">
     </div>
     
     <!--contenido izquierda-->
     <div id="cont-izq">
-        <img src="static/imagenes/imagen.jpg" alt="imagen">
+        <img src="../static/imagenes/imagen.jpg" th:src="@{/imagenes/imagen.jpg}" alt="imagen">
     </div>
 </body>
 </html>

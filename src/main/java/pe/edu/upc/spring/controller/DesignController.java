@@ -34,7 +34,7 @@ public class DesignController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido";
+		return "MenuDiseñador";
 	}
 	
 	@RequestMapping("/")
@@ -50,7 +50,7 @@ public class DesignController {
 		
 		model.addAttribute("listaDisenadores", deService.listar());
 		
-		return "design";
+		return "Estampado";
 	}
 	
 	@RequestMapping("/registrar")
