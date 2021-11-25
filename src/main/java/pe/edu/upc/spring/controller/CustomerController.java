@@ -2,7 +2,6 @@ package pe.edu.upc.spring.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,7 +20,6 @@ import pe.edu.upc.spring.model.Complain;
 import pe.edu.upc.spring.model.ComplainxCustomer;
 import pe.edu.upc.spring.model.Customer;
 import pe.edu.upc.spring.model.Garment;
-import pe.edu.upc.spring.model.GarmentPosition;
 import pe.edu.upc.spring.service.IComplainService;
 import pe.edu.upc.spring.service.IComplainxCustomerService;
 import pe.edu.upc.spring.service.ICustomerService;
