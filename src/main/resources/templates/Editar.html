@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../static/css/style4.css" th:href="@{/css/style4.css}">
+   	<link rel="stylesheet" href="static/css/style4.css" th:href="@{/css/style4.css}">
     <title>Document</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
     </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="MenuDiseñador.html">Styleprint</a>
+      <a class="navbar-brand" th:href="MenuCliente.html">Styleprint</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="#">UserName</a>
@@ -31,29 +31,29 @@
 <div class="d-flex">
     <div id="sidebar-container" class="bg-primary">
         <div class="menu">
-          <a th:href="@{/designer/perfil}" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
+            <a th:href="@{/designer/perfil}" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
                 <a th:href="@{/designer/listarEstampado}" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
                 <a th:href="@{/designer/irRegistrar}" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Publicar diseño</a>
         </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <br>
-          <br>
-          <br>
-          <br>
-        </div>
-        <div class="col">
-          <br>
-          <br>
-          <br>
-          <br>
-        </div>
-    </div>
-    <div class="card col-sm-6 p-3 h-25 centrar" style="margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: auto; height: 610px !important; ">
-      <form class="container">
-          <center><h2 class="textbox">EDITAR PERFIL</h2></center>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class="col">
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+      </div>
+      <div class="card col-sm-6 p-3 h-25 centrar" style="margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: auto; height: 450px !important; ">
+        <form class="container" >
+          <h2 class="textbox">EDITAR PERFIL</h2>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nombres</label>
               <input th:field="*{nameDesigner}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tus nombres">
@@ -82,7 +82,8 @@
               <button th:field="*{nameDesigner}" type="submit" class="btn1 btn-primary" position-relative>Guardar cambios</span></button>
             </div>
       </form>
-    </div>
+  </div>
 </div>
+
 </body>
 </html>

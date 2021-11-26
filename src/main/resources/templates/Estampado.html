@@ -1,81 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link
-    rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
-   
-    <link rel="stylesheet" href="css/style7.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+	integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="../static/css/style7.css"
+	th:href="@{/css/style7.css}">
+<title>Document</title>
 </head>
 <body style="overflow: hidden;">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarTogglerDemo01"
+			aria-controls="navbarTogglerDemo01" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="MenuCliente.html">Styleprint</a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">UserName</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0" id="espacio">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="buscar">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-        <a class="nav-link" href="MenuCliente.html">Home<span class="sr-only">(current)</span><i class="fas fa-home lead"></i></a>
-</nav>
-  <div class="d-flex" style="height: max-content;">
-    <div id="sidebar-container" class="bg-primary">
-        <div class="menu">
-          <a href="MenuDiseñador.html" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
-          <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
-          <a href="" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Publicar diseño</a>
-        </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <br>
-          <br>
-          <br>
-          <br>
-        </div>
-      <div class="col">
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-      </div>
-      <div class="row">
-        <div class="col"><img src="static/imagenes/PoloNegro.jpg"
-          width="400"
-          height="341">
-        </div>
-        <div class="col order-12">
-           <div class="w-75 p-3" style="background-color: #16191C ;">
-            <center><h2>Ingreso de datos del diseño</h2></center>
-      <br>
-          <div class="form-group">
-            <left><label for="sel1">URL de la imagen</label></left>
-            <input type="text" class="form-control" id="sel1">
-          </div>
-          <div class="form-group">
-              <left><label for="sel1">Detalle</label></left>
-            <textarea placeholder="Detalle" class="form-control" rows="3"></textarea>
-          <br>
-          <center><button type="button" class="btn btn-primary">Ingresar estampado</button></center>
-          </div>
-      </div>
-        </div>
-        </div>
-      </div>
-  </div>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<a class="navbar-brand" th:href="MenuCliente.html">Styleprint</a>
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item"><a class="nav-link" href="#">UserName</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" id="espacio">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search" id="buscar">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+			<a class="nav-link" href="MenuCliente.html">Home<span
+				class="sr-only">(current)</span><i class="fas fa-home lead"></i></a>
+		</div>
+	</nav>
+	<div class="d-flex" style="height: max-content;">
+		<div id="sidebar-container" class="bg-primary">
+			<div class="menu">
+				<a th:href="@{/designer/perfil}" class="d-block p-3" style="color: white;"><i class="fas fa-user-circle mr-2 lead"></i>Mi perfil</a>
+                <a th:href="@{/designer/listarEstampado}" class="d-block p-3" style="color: white;"><i class="fas fa-shopping-bag mr-2 lead"></i>Mis diseños</a>
+                <a th:href="@{/designer/irRegistrar}" class="d-block p-3" style="color: white;"><i class="fas fa-paint-brush mr-2 lead"></i>Publicar diseño</a>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<br> <br> <br> <br>
+				</div>
+				<div class="col">
+					<br> <br> <br> <br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<img src="../static/imagenes/PoloNegro.jpg"
+						th:src="@{static/imagenes/PoloNegro.jpg}" width="400" height="341">
+				</div>
+				<div class="col order-12">
+					<div class="w-75 p-3" style="background-color: #16191C;">
+						<h2>Ingreso de datos del diseño</h2>
+						<br>
+						<form th:action="@{/designer/registrarEstampado}" method="post"	th:object="${design}">
+							<div class="form-group">
+								<label for="sel1">Nombre diseño</label> <input type="text"
+									class="form-control" id="sel1" th:field="*{nameDesign}">
+							</div>
+							<div class="form-group">
+								<label for="sel1">URL de la imagen</label> <input type="text"
+									class="form-control" id="sel1" th:field="*{imgDesign}">
+							</div>
+							<div class="form-group">
+								<label for="sel1">Detalle</label>
+								<textarea placeholder="Detalle" class="form-control" rows="3"
+									th:field="*{detailDesign}"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="sel1">Fecha de publicación</label> <input
+									type="date" class="form-control" id="sel1"
+									th:field="*{dateDesign}">
+							</div>
+							<div class="form-group">
+								<label for="sel1">ID</label> <input
+									class="form-control" id="sel1"
+									th:field="*{idDesign}">
+							</div>
+							<div class="form-group">
+								<label for="sel1">Diseñador</label> <select class="form-control"
+									th:field="*{designer.idDesigner}">
+									<option th:each="d: ${listaDisenadores}"
+										th:value="${d.idDesigner}" th:text="${d.nameDesigner}"
+										th:selected="(${d.idDesigner} == *{designer.idDesigner})">
+									</option>
+								</select>
+							</div>
+							<br>
+							<button type="submit" class="btn1 btn-primary" value="guardar">Ingresar
+								estampado</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
